@@ -1,0 +1,31 @@
+{
+  "name": "train-schedule-management",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.27.1",
+    "@sncf/bootstrap-sncf.metier": "^4.3.1-r5",
+    "@swc/helpers": "^0.5.17",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
+    "bootstrap": "^5.3.6",
+    "date-fns": "^4.1.0",
+    "mdb-react-ui-kit": "^9.0.0",
+    "multer": "^1.4.5-lts.2",
+    "mysql2": "^3.14.1",
+    "next": "latest",
+    "next-connect": "^1.0.0",
+    "qrcode.react": "^4.2.0",
+    "react": "latest",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "latest",
+    "react-icons": "^5.5.0",
+    "react-qr-code": "^2.0.15"
+  }
+}

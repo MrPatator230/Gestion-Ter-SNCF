@@ -1,0 +1,230 @@
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import styles from './Afficheurs.module.css';
+import { getStationSchedules, filterSchedulesByType, sortSchedulesByTime, getTrainStatus, getStationTime } from '../../utils/scheduleUtils';
+
+export default function AfficheursPublic() {
+  const router = useRouter();
+  const { type, gare } = router.query;
+
+  const [schedules, setSchedules] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [trainTypeLogos, setTrainTypeLogos] = useState({});
+
+  useEffect(() => {
+    let intervalId;
+
+    async function fetchTrainTypeLogos() {
+      try {
+        const res = await fetch('/api/trainTypeLogos');
+        if (res.ok) {
+          const data = await res.json();
+          setTrainTypeLogos(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch train type logos:', error);
+      }
+    }
+
+    async function fetchSchedules() {
+      if (type && gare) {
+        const stationSchedules = getStationSchedules(gare);
+        const filtered = filterSchedulesByType(stationSchedules, gare, type);
+        const sorted = sortSchedulesByTime(filtered, gare, type);
+        setSchedules(sorted);
+        setLoading(false);
+      } else {
+        setSchedules([]);
+        setLoading(false);
+      }
+    }
+
+    async function fetchData() {
+      await fetchTrainTypeLogos();
+      await fetchSchedules();
+    }
+
+    fetchData();
+
+    intervalId = setInterval(fetchData, 10000); // Poll every 10 seconds
+
+    return () => clearInterval(intervalId);
+  }, [type, gare]);
+
+  useEffect(() => {
+    if (type && gare) {
+      const stationSchedules = getStationSchedules(gare);
+      const filtered = filterSchedulesByType(stationSchedules, gare, type);
+      const sorted = sortSchedulesByTime(filtered, gare, type);
+      setSchedules(sorted);
+      setLoading(false);
+    } else {
+      setSchedules([]);
+      setLoading(false);
+    }
+  }, [type, gare]);
+  
+  
+
+  if (!type || !gare) {
+    return (
+      <div className={styles.afficheursContainer}>
+        <p className={styles.errorMessage}>Paramètres manquants. Veuillez fournir le type (departures/arrivals) et la gare dans l'URL.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.afficheursContainer}>
+      {loading ? (
+        <p className={styles.loadingMessage}>Chargement...</p>
+      ) : schedules.length === 0 ? (
+        <p className={styles.noSchedulesMessage}>Aucun horaire trouvé pour cette gare.</p>
+      ) : (
+        <div className={styles.scheduleList}>
+          {schedules.map((schedule, index) => {
+            const status = getTrainStatus(schedule);
+            const trainType = schedule.trainType || 'MOBIGO';
+            const logoSrc = trainTypeLogos[trainType] || '/images/sncf-logo.png';
+            const isEven = index % 2 === 0;
+            const displayTime = getStationTime(schedule, gare, 'departure');
+
+            return (
+              <ScheduleRow
+                key={schedule.id}
+                schedule={schedule}
+                status={status}
+                trainType={trainType}
+                logoSrc={logoSrc}
+                isEven={isEven}
+                type={type}
+                displayTime={displayTime}
+                gare={gare}
+                delayMinutes={schedule.delayMinutes || 0}
+              />
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ScheduleRow({ schedule, status, trainType, logoSrc, isEven, type, displayTime, gare, delayMinutes }) {
+  const [displayIndex, setDisplayIndex] = useState(0);
+
+  // Calculate delayed departure time string
+  const getDelayedTime = () => {
+    if (!delayMinutes || delayMinutes <= 0) return null;
+    const [hours, minutes] = displayTime.split(':').map(Number);
+    let date = new Date();
+    date.setHours(hours);
+    date.setMinutes(minutes + delayMinutes);
+    const delayedHours = date.getHours().toString().padStart(2, '0');
+    const delayedMinutes = date.getMinutes().toString().padStart(2, '0');
+    return `${delayedHours}:${delayedMinutes}`;
+  };
+
+  const delayedTime = getDelayedTime();
+
+  useEffect(() => {
+    let interval;
+    if (status === 'à l\'heure') {
+      // Alternate between train type and train number vertically every 2 seconds
+      interval = setInterval(() => {
+        setDisplayIndex(prev => (prev + 1) % 2);
+      }, 2000);
+    } else if (status === 'supprimé') {
+      // Cycle through train type, number, and "supprimé" every 2 seconds
+      interval = setInterval(() => {
+        setDisplayIndex(prev => (prev + 1) % 3);
+      }, 2000);
+    } else {
+      // For "retardé" or other statuses, show train type and number together (displayIndex 0)
+      setDisplayIndex(0);
+    }
+    return () => clearInterval(interval);
+  }, [status]);
+
+  // Determine what to display based on status and displayIndex
+  const renderStatusContent = () => {
+    if (status === 'à l\'heure') {
+      if (displayIndex === 0) {
+        return (
+          <div className={styles.trainTypeNameContainer}>
+            <div>{trainType}</div>
+            <div>{schedule.trainNumber || ''}</div>
+          </div>
+        );
+      } else {
+        return <div className={styles.statusText}>à l&apos;heure</div>;
+      }
+    } else if (status === 'retardé') {
+      // Display train type and number together
+      return (
+        <div className={styles.statusRetarde}>
+          <div>{trainType}</div>
+          <div>{schedule.trainNumber || ''}</div>
+        </div>
+      );
+    } else if (status === 'supprimé') {
+      // Alternate train type, number, and "supprimé" in yellow, hide time when "supprimé" is displayed
+      if (displayIndex === 0) {
+        return <div className={styles.statusSupprime}>{trainType}</div>;
+      } else if (displayIndex === 1) {
+        return <div className={styles.statusSupprime}>{schedule.trainNumber || ''}</div>;
+      } else {
+        return <div className={styles.statusSupprimeYellow}>supprimé</div>;
+      }
+    } else {
+      // Default fallback
+      return <div>{trainType}</div>;
+    }
+  };
+
+  return (
+    <div className={`${styles.scheduleRow} ${isEven ? styles.scheduleRowEven : styles.scheduleRowOdd}`}>
+      <div className={styles.leftSection}>
+        <div className={styles.logoContainer}>
+          <Image src={logoSrc} alt={trainType} layout="fill" objectFit="contain" />
+        </div>
+        <div className={styles.statusText}>
+          {renderStatusContent()}
+        </div>
+      </div>
+      <div className={styles.departureTime} style={{ color: status === 'supprimé' && displayIndex === 2 ? 'transparent' : '#ffea00' }}>
+        {status === 'retardé' && !displayIndex ? displayTime : (status === 'retardé' && displayIndex ? delayedTime : (status !== 'supprimé' ? displayTime : (displayIndex === 2 ? '' : displayTime)))}
+      </div>
+      <div className={styles.middleSection}>
+        <div className={styles.destination}>{type === 'departures' ? schedule.arrivalStation : schedule.departureStation}</div>
+        {schedule.servedStations && schedule.servedStations.length > 0 && (
+          <div className={styles.viaContainer}>
+            <span className={styles.viaText}>Via</span>
+            <div className={styles.marquee}>
+              <div className={styles.marqueeContent}>
+                {(() => {
+                  const selectedStation = gare;
+                  let stationsList = [];
+                  if (schedule.servedStations && schedule.servedStations.length > 0) {
+                    const normalizedStations = schedule.servedStations.map(station => typeof station === 'object' ? station.name : station);
+                    const startIndex = normalizedStations.indexOf(selectedStation);
+                    if (startIndex !== -1) {
+                      stationsList = normalizedStations.slice(startIndex + 1);
+                    }
+                  }
+                  return stationsList.map((station, idx) => (
+                    <span key={idx} className={styles.marqueeStation}>
+                      {station}{idx < stationsList.length - 1 ? ' • ' : ''}
+                    </span>
+                  ));
+                })()}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+      <div className={styles.rightSection}>{schedule.track || '-'}</div>
+    </div>
+  );
+}

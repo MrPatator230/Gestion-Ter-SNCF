@@ -1,0 +1,15 @@
+display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.8rem;
+  user-select: none;
+}
+=======
+.viaRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.8rem;
+  user-select: none;
+  margin-top: 70px;
+}

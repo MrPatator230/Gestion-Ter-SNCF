@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Achemine&display=swap');
+
+.aflContainer {
+  background-color: #1F5628; /* Updated to match the dark blue background in the image */
+  padding: 0;
+  font-family: 'Avenir', 'sans-serif';
+  width: 100vw;
+  height: 92vh;
+  max-width: 100%;
+  overflow: clip;
+  color: rgb(255, 255, 255);
+}
+
+.scrollContainer {
+  width: 1250px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 3px;
+}
+
+.scrollContent span {
+  display: inline-block;
+  padding: 0 0.25rem;
+  white-space: nowrap;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.arrow {
+  margin: 0 0.25rem;
+  user-select: none;
+}
+
+.header {
+  background-color: #187936;
+  display: flex;
+  align-items: center;
+  padding: 10px 50px;
+  font-weight: 900;
+  font-size: 5rem;
+  gap: 15px;
+  position: relative;
+}
+
+.headerIcon {
+  font-size: 3.6rem;
+  color: white;
+}
+
+.headerTitle {
+  flex-grow: 1;
+  color: aliceblue;
+  font-family: 'Avenir';
+}
+
+.headerTime {
+  font-weight: 900;
+  font-size: 2.4rem;
+  color: white;
+  font-family: 'Avenir';
+}
+
+.paginationDots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #115527;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+.dot.active {
+  background-color: #2fcc61;
+}
+
+.scheduleList {
+  margin-top: 0;
+  padding: 0 30px 30px 30px;
+  list-style: none;
+}
+
+.scheduleRow {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #004a8f;
+  font-size: 1.6rem;
+}
+
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 120px;
+  gap: 8px;
+}
+
+.departureTime {
+  color: #dfff00; /* bright yellow */
+  font-weight: 900;
+  font-size: 3.6rem;
+  user-select: none;
+  padding-right: 50px;
+}
+
+.statusBadge {
+  background-color: #187936;
+  border-radius: 120px;
+  padding: 8px 12px; /* Increased vertical padding for better height */
+  color: white;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row; /* Align icon and text horizontally */
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  user-select: none;
+  font-size: 1.1rem;
+  width: 170px; /* Fixed width to match design */
+  height: 40px; /* Adjusted height for single line */
+  text-align: right; /* Align text to the right */
+  min-width: 170px;
+}
+
+.statusBadge svg {
+  align-self: right;
+  vertical-align: middle;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  height: 2.5rem !important;
+  width: 2.5rem !important;
+}
+
+.statusBadge i {
+  color: white;
+  font-size: 1.4rem;
+}
+
+.trainInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 110px; /* Adjusted to match departureTime width */
+  margin-left: 20px;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: white;
+  gap: 4px;
+  padding-right: 50px;
+}
+
+.middleSection {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.destinationRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+  font-size: 2.8rem;
+  user-select: none;
+}
+
+.destinationRow i {
+  font-size: 2.4rem;
+  color: white;
+}
+
+.viaRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.8rem;
+  user-select: none;
+  margin-top: 70px;
+}
+
+.viaRow span {
+  cursor: default;
+}
+
+.viaRow .bold {
+  font-weight: 900;
+  color: white;
+}
+
+.viaRow .arrow {
+  color: rgb(41, 224, 93);
+  font-weight: 900;
+  font-size: 2rem;
+  margin: 0 6px;
+  user-select: none;
+}
+
+.rightSection {
+  min-width: 80px;
+  height: 80px;
+  background-color: white;
+  border-radius: 12px;
+  color: #003366;
+  font-weight: 900;
+  font-size: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+  user-select: none;
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.rightSection .label {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: -10px;
+}
+
+/* Scrollbar hidden for marquee if needed */
+.marquee {
+  white-space: nowrap;
+}
+
+.causeBadge {
+  color: white;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 1.4rem;
+  max-width: 300px;
+  overflow-wrap: break-word;
+  margin-left: 8px;
+  display: inline-block;
+  user-select: none;
+  white-space: normal;
+  text-align: center;
+}
+
+/* New CSS class for next day text */
+.nextDaySection {
+  padding: 10px 30px;
+  text-align: center;
+}
+
+.nextDayText {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #dfff00;
+  user-select: none;
+}
+
+/* New CSS class for line height on second page */
+.secondPageLineHeight {
+  line-height: 3.5rem;
+}

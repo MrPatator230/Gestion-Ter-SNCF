@@ -1,0 +1,55 @@
+{
+  "categories": [
+    {
+      "name": "Régionaux",
+      "logos": {
+        "logo-aleop.svg": "Aleop",
+        "logo-auvergerhonealpes.svg": "Auvergne Rhône-Alpes",
+        "logo-breizhgo.svg": "BreizhGo",
+        "logo-hautsdefrance.svg": "Hauts-de-France",
+        "logo-mobigo.svg": "Mobigo",
+        "logo-occitanie.svg": "Occitanie",
+        "logo-ter-rhone-alpes.svg": "TER Rhône-Alpes",
+        "logo-ter.svg": "TER",
+        "logo-terbretagne.svg": "TER Bretagne",
+        "logo-tercentre.svg": "TER Centre"
+      }
+    },
+    {
+      "name": "Nationaux",
+      "logos": {
+        "logo-inoui.svg": "TGV InOui",
+        "logo-lyria.svg": "TGV Lyria",
+        "logo-ouigo.svg": "TGV Ouigo",
+        "logo-ouigo-classique.svg": "OUIGO Trains Classiques",
+        "logo-intercites.svg": "Intercités",
+        "logo-tgv.svg": "TGV",
+        "logo-thalys.svg": "Thalys",
+        "logo-eurostar.svg": "Eurostar"
+      }
+    },
+    {
+      "name": "Internationaux",
+      "logos": {
+        "logo-db.svg": "DB",
+        "logo-sbb.svg": "SBB",
+        "logo-sncb.svg": "SNCB",
+        "logo-frecciarossa.svg": "Frecciarossa",
+        "logo-renfeave.svg": "Renfe AVE",
+        "logo-trenitalia.svg": "Trenitalia"
+      }
+    },
+    {
+      "name": "Autres",
+      "logos": {
+        "logo-rer-a.svg": "RER A",
+        "logo-rer-b.svg": "RER B",
+        "logo-rer-c.svg": "RER C",
+        "logo-rer-d.svg": "RER D",
+        "logo-rer-e.svg": "RER E",
+        "logo-tramtrain.svg": "TramTrain",
+        "sncf-voyageurs-logo.png": "SNCF"
+      }
+    }
+  ]
+}

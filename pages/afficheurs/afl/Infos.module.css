@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #e3780c;
+  padding: 0.5rem 1rem;
+  color: white;
+  font-family: 'Avenir', sans-serif;
+  height: 3.5rem;
+}
+
+.logo {
+  height: 2rem;
+  width: 2rem;
+  margin-right: 0.75rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+.time {
+  font-size: 1.25rem;
+  font-weight: 600;
+  min-width: 4.5rem;
+  text-align: right;
+}

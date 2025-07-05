@@ -1,0 +1,65 @@
+.auraTheme {
+  --primary-color: #0055a4;
+  --secondary-color: #00a1de;
+  --accent-color: #fdb813;
+}
+
+.bretagneTheme {
+  --primary-color: #0085ca;
+  --secondary-color: #f58220;
+  --accent-color: #fdb813;
+}
+
+.centreTheme {
+  --primary-color: #007a33;
+  --secondary-color: #fdb813;
+  --accent-color: #e4002b;
+}
+
+.grandEstTheme {
+  --primary-color: #003366;
+  --secondary-color: #e4002b;
+  --accent-color: #fdb813;
+}
+
+.hdfTheme {
+  --primary-color: #003366;
+  --secondary-color: #fdb813;
+  --accent-color: #e4002b;
+}
+
+.mobigoTheme {
+  --primary-color: #00682b;
+  --secondary-color: #fdb813;
+  --accent-color: #e4002b;
+}
+
+.normandieTheme {
+  --primary-color: #003366;
+  --secondary-color: #fdb813;
+  --accent-color: #e4002b;
+}
+
+.nouvelleAquitaineTheme {
+  --primary-color: #003366;
+  --secondary-color: #fdb813;
+  --accent-color: #e4002b;
+}
+
+.occitanieTheme {
+  --primary-color: #e4002b;
+  --secondary-color: #fdb813;
+  --accent-color: #003366;
+}
+
+.pacaTheme {
+  --primary-color: #003366;
+  --secondary-color: #fdb813;
+  --accent-color: #e4002b;
+}
+
+.pddlTheme {
+  --primary-color: #003366;
+  --secondary-color: #fdb813;
+  --accent-color: #e4002b;
+}

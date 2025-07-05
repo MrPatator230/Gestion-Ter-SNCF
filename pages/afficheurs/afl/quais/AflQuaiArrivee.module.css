@@ -1,0 +1,89 @@
+.container {
+  background-color: #0033a0;
+  font-family: 'Arial', sans-serif;
+  padding: 1rem;
+  width: 600px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  fill: white;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infoBox {
+  background-color: #0057b8;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  flex-grow: 1;
+}
+
+.origin {
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.trainNumber {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.arrivalTimeLabel {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.arrivalTime {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #dfff00;
+  margin: 0;
+}
+
+.platformBox {
+  background-color: #002080;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  text-align: center;
+  width: 100px;
+}
+
+.platformLabel {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.platformNumber {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.error, .loading, .noSchedule {
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 2rem;
+}

@@ -1,0 +1,417 @@
+const [trafficInfos, setTrafficInfos] = useState([]);
+
+  useEffect(() => {
+    const savedTrafficInfos = localStorage.getItem('trafficInfos');
+    if (savedTrafficInfos) {
+      setTrafficInfos(JSON.parse(savedTrafficInfos));
+    }
+  }, []);
+
+  if (trafficInfos.length === 0) {
+    return (
+      <div className="sncf-card h-100">
+        <div className="sncf-card-body">
+          <h2 className="h4 mb-3">Infos Traffics</h2>
+          <p>Aucune info trafic enregistrée.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="sncf-card h-100">
+      <div className="sncf-card-body">
+        <h2 className="h4 mb-3">Infos Traffics</h2>
+        <ul className="list-unstyled">
+          {trafficInfos.map(info => (
+            <li key={info.id} className="mb-3">
+              <strong>{info.title}</strong><br />
+              <small>{info.startDate || '-'} {info.endDate ? `à ${info.endDate}` : ''}</small><br />
+              <span>{info.description}</span><br />
+              <span className={`badge bg-secondary`}>{info.impactType}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+=======
+function InfosTrafficsWidget({ onSelectInfo }) {
+  const [trafficInfos, setTrafficInfos] = useState([]);
+
+  useEffect(() => {
+    const savedTrafficInfos = localStorage.getItem('trafficInfos');
+    if (savedTrafficInfos) {
+      setTrafficInfos(JSON.parse(savedTrafficInfos));
+    }
+  }, []);
+
+  if (trafficInfos.length === 0) {
+    return (
+      <div className="sncf-card h-100">
+        <div className="sncf-card-body">
+          <h2 className="h4 mb-3">Infos Traffics</h2>
+          <p>Aucune info trafic enregistrée.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="sncf-card h-100">
+      <div className="sncf-card-body">
+        <h2 className="h4 mb-3">Infos Traffics</h2>
+        <ul className="list-unstyled">
+          {trafficInfos.map(info => (
+            <li
+              key={info.id}
+              className="mb-3"
+              style={{ cursor: 'pointer' }}
+              onClick={() => onSelectInfo(info)}
+            >
+              <strong>{info.title}</strong><br />
+              <small>{info.startDate || '-'} {info.endDate ? `à ${info.endDate}` : ''}</small><br />
+              <span>{info.description}</span><br />
+              <span className={`badge bg-secondary`}>{info.impactType}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+<<<<<<< SEARCH
+function ActualitesWidget() {
+  const [newsPosts, setNewsPosts] = useState([]);
+
+  useEffect(() => {
+    const savedNews = localStorage.getItem('newsPosts');
+    if (savedNews) {
+      const posts = JSON.parse(savedNews);
+      // Sort by date descending, handle missing dates by putting them last
+      posts.sort((a, b) => {
+        const dateA = a.date ? new Date(a.date) : new Date(0);
+        const dateB = b.date ? new Date(b.date) : new Date(0);
+        return dateB - dateA;
+      });
+      setNewsPosts(posts.slice(0, 5));
+    }
+  }, []);
+
+  if (newsPosts.length === 0) {
+    return (
+      <div className="sncf-card h-100">
+        <div className="sncf-card-body">
+          <h2 className="h4 mb-3">Actualités</h2>
+          <p>Aucune actualité enregistrée.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="sncf-card h-100">
+      <div className="sncf-card-body">
+        <h2 className="h4 mb-3">Actualités</h2>
+        <ul className="list-unstyled">
+          {newsPosts.map(post => (
+            <li key={post.id} className="mb-3">
+              <strong>{post.title}</strong><br />
+              <small>{post.date && !isNaN(new Date(post.date)) ? new Date(post.date).toLocaleDateString() : ''}</small><br />
+              <p>{post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content}</p>
+            </li>
+          ))}
+        </ul>
+        <a href="/actualites" className={`btn btn-primary ${buttonStyles['btn-primary']}`}>
+          <span className="material-icons me-2">article</span>
+          Voir toutes les actualités
+        </a>
+      </div>
+    </div>
+  );
+}
+=======
+function ActualitesWidget({ onSelectPost }) {
+  const [newsPosts, setNewsPosts] = useState([]);
+
+  useEffect(() => {
+    const savedNews = localStorage.getItem('newsPosts');
+    if (savedNews) {
+      const posts = JSON.parse(savedNews);
+      // Sort by date descending, handle missing dates by putting them last
+      posts.sort((a, b) => {
+        const dateA = a.date ? new Date(a.date) : new Date(0);
+        const dateB = b.date ? new Date(b.date) : new Date(0);
+        return dateB - dateA;
+      });
+      setNewsPosts(posts.slice(0, 5));
+    }
+  }, []);
+
+  if (newsPosts.length === 0) {
+    return (
+      <div className="sncf-card h-100">
+        <div className="sncf-card-body">
+          <h2 className="h4 mb-3">Actualités</h2>
+          <p>Aucune actualité enregistrée.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="sncf-card h-100">
+      <div className="sncf-card-body">
+        <h2 className="h4 mb-3">Actualités</h2>
+        <ul className="list-unstyled">
+          {newsPosts.map(post => (
+            <li
+              key={post.id}
+              className="mb-3"
+              style={{ cursor: 'pointer' }}
+              onClick={() => onSelectPost(post)}
+            >
+              <strong>{post.title}</strong><br />
+              <small>{post.date && !isNaN(new Date(post.date)) ? new Date(post.date).toLocaleDateString() : ''}</small><br />
+              <p>{post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content}</p>
+            </li>
+          ))}
+        </ul>
+        <a href="/actualites" className={`btn btn-primary ${buttonStyles['btn-primary']}`}>
+          <span className="material-icons me-2">article</span>
+          Voir toutes les actualités
+        </a>
+      </div>
+    </div>
+  );
+}
+<<<<<<< SEARCH
+export default function Home() {
+  const { logoUrl } = useContext(SettingsContext);
+  const displayName = logoNameMap[logoUrl] || 'SNCF TER Mobigo';
+
+  return (
+    <>
+      <div className="main-wrapper">
+        <Layout>
+          <main className="main-container">
+            <div className="container-fluid">
+              <h1 className="sncf-title mb-4">Bienvenue sur {displayName}</h1>
+
+              <div className="row g-4">
+                <div className="col-md-6">
+                  <ActualitesWidget />
+                </div>
+
+                <div className="col-md-6">
+                  <InfosTrafficsWidget />
+                </div>
+
+                <div className="col-md-6">
+                  <div className="sncf-card h-100">
+                    <div className="sncf-card-body">
+                      <h2 className="h4 mb-3">Horaires et Itinéraires</h2>
+                      <p>Consultez les horaires et planifiez vos trajets en quelques clics.</p>
+                      <a href="/verifier-horaires" className={`btn btn-primary ${buttonStyles['btn-primary']}`}>
+                        <span className="material-icons me-2">schedule</span>
+                        Vérifier les horaires
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="sncf-card h-100">
+                    <div className="sncf-card-body">
+                      <h2 className="h4 mb-3">Abonnements & Billets</h2>
+                      <p>Découvrez nos offres d'abonnement et achetez vos billets en ligne.</p>
+                      <a href="/abonnements-et-billets" className={`btn btn-primary ${buttonStyles['btn-primary']}`}>
+                        <span className="material-icons me-2">card_membership</span>
+                        Voir les offres
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="sncf-card h-100">
+                    <div className="sncf-card-body">
+                      <h2 className="h4 mb-3">Nos Gares</h2>
+                      <p>Trouvez toutes les informations sur les gares de votre région.</p>
+                      <a href="/stations" className={`btn btn-primary ${buttonStyles['btn-primary']}`}>
+                        <span className="material-icons me-2">train</span>
+                        Explorer les gares
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </Layout>
+        <Footer />
+      </div>
+    </>
+  );
+}
+=======
+export default function Home() {
+  const { logoUrl } = useContext(SettingsContext);
+  const displayName = logoNameMap[logoUrl] || 'SNCF TER Mobigo';
+
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedInfo, setSelectedInfo] = useState(null);
+
+  const closePostModal = () => setSelectedPost(null);
+  const closeInfoModal = () => setSelectedInfo(null);
+
+  return (
+    <>
+      <div className="main-wrapper">
+        <Layout>
+          <main className="main-container">
+            <div className="container-fluid">
+              <h1 className="sncf-title mb-4">Bienvenue sur {displayName}</h1>
+
+              <div className="row g-4">
+                <div className="col-md-6">
+                  <ActualitesWidget onSelectPost={setSelectedPost} />
+                </div>
+
+                <div className="col-md-6">
+                  <InfosTrafficsWidget onSelectInfo={setSelectedInfo} />
+                </div>
+
+                <div className="col-md-6">
+                  <div className="sncf-card h-100">
+                    <div className="sncf-card-body">
+                      <h2 className="h4 mb-3">Horaires et Itinéraires</h2>
+                      <p>Consultez les horaires et planifiez vos trajets en quelques clics.</p>
+                      <a href="/verifier-horaires" className={`btn btn-primary ${buttonStyles['btn-primary']}`}>
+                        <span className="material-icons me-2">schedule</span>
+                        Vérifier les horaires
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="sncf-card h-100">
+                    <div className="sncf-card-body">
+                      <h2 className="h4 mb-3">Abonnements & Billets</h2>
+                      <p>Découvrez nos offres d'abonnement et achetez vos billets en ligne.</p>
+                      <a href="/abonnements-et-billets" className={`btn btn-primary ${buttonStyles['btn-primary']}`}>
+                        <span className="material-icons me-2">card_membership</span>
+                        Voir les offres
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="sncf-card h-100">
+                    <div className="sncf-card-body">
+                      <h2 className="h4 mb-3">Nos Gares</h2>
+                      <p>Trouvez toutes les informations sur les gares de votre région.</p>
+                      <a href="/stations" className={`btn btn-primary ${buttonStyles['btn-primary']}`}>
+                        <span className="material-icons me-2">train</span>
+                        Explorer les gares
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </Layout>
+        <Footer />
+      </div>
+
+      {/* Modal for Actualité */}
+      {selectedPost && (
+        <div
+          className="modal fade show"
+          style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}
+          tabIndex="-1"
+          role="dialog"
+          onClick={closePostModal}
+        >
+          <div
+            className="modal-dialog modal-lg"
+            role="document"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">{selectedPost.title}</h5>
+                <button type="button" className="btn-close" aria-label="Close" onClick={closePostModal}></button>
+              </div>
+              <div className="modal-body">
+                <small className="text-muted">{selectedPost.date && !isNaN(new Date(selectedPost.date)) ? new Date(selectedPost.date).toLocaleDateString() : ''}</small>
+                <p>{selectedPost.content}</p>
+                {selectedPost.attachments && selectedPost.attachments.length > 0 && (
+                  <div className="mt-3">
+                    <strong>Fichiers joints :</strong>
+                    <ul className="list-unstyled d-flex flex-wrap gap-3 mt-2">
+                      {selectedPost.attachments.map((file, idx) => (
+                        <li key={idx}>
+                          <a href={file.url} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary btn-sm">
+                            {file.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={closePostModal}>Fermer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for Info Traffic */}
+      {selectedInfo && (
+        <div
+          className="modal fade show"
+          style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}
+          tabIndex="-1"
+          role="dialog"
+          onClick={closeInfoModal}
+        >
+          <div
+            className="modal-dialog modal-lg"
+            role="document"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">{selectedInfo.title}</h5>
+                <button type="button" className="btn-close" aria-label="Close" onClick={closeInfoModal}></button>
+              </div>
+              <div className="modal-body">
+                <small className="text-muted">{selectedInfo.startDate || '-'} {selectedInfo.endDate ? `à ${selectedInfo.endDate}` : ''}</small>
+                <p>{selectedInfo.description}</p>
+                <span className={`badge bg-secondary`}>{selectedInfo.impactType}</span>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={closeInfoModal}>Fermer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      <style jsx>{`
+        .sncf-card {
+          border-color: var(--primary-color);
+        }
+        .sncf-title {
+          color: var(--primary-color);
+        }
+      `}</style>
+    </>
+  );
+}

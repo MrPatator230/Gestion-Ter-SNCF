@@ -1,0 +1,11 @@
+{statusCode === 'delayed' && (
+  <>
+    <svg viewBox="0 0 500 500" style={{ height: '1.8rem', width: '2rem', marginRight: '1rem', marginLeft: '0.3rem', display: 'block', marginTop: 'auto', marginBottom: 'auto' }} aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg">
+      <path d="M250,116.7c-73.5,0-133.3,59.8-133.3,133.3S176.5,383.3,250,383.3,383.3,323.5,383.3,250,323.5,116.7,250,116.7Zm70.5,202.2-87.9-52.3v-100h25v87.9l75,44.7-12.1,19.7Z" 
+      fill="#ff7f50" />
+      <path d="M250,1C112.6516,1,1,112.6516,1,250S112.6516,499,250,499,499,387.3484,499,250,387.3484,1,250,1Zm0,415.0332c-91.3332,0-166.0332-74.7-166.0332-166.0332S157.97,83.9668,250,83.9668,416.0332,158.6668,416.0332,250,341.3332,416.0332,250,416.0332Z" 
+      fill="#ff7f50" />
+    </svg>
+    <span>Retardé</span>
+  </>
+)}

@@ -1,0 +1,2 @@
+ALTER TABLE stations
+ADD COLUMN message TEXT DEFAULT NULL;

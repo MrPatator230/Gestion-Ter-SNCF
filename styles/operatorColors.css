@@ -1,0 +1,71 @@
+:root {
+  /* Aura */
+  --aura-primary: #0055a4;
+  --aura-secondary: #00a1de;
+  --aura-accent: #fdb813;
+
+  /* Bretagne */
+  --bretagne-primary: #0085ca;
+  --bretagne-secondary: #f58220;
+  --bretagne-accent: #fdb813;
+
+  /* Centre */
+  --centre-primary: #007a33;
+  --centre-secondary: #fdb813;
+  --centre-accent: #e4002b;
+
+  /* Grand Est */
+  --grand_est-primary: #003366;
+  --grand_est-secondary: #e4002b;
+  --grand_est-accent: #fdb813;
+
+  /* Hauts-de-France (hdf) */
+  --hdf-primary: #003366;
+  --hdf-secondary: #fdb813;
+  --hdf-accent: #e4002b;
+
+  /* Mobigo */
+  --mobigo-primary: #00682b;
+  --mobigo-secondary: #fdb813;
+  --mobigo-accent: #e4002b;
+
+  /* Normandie */
+  --normandie-primary: #003366;
+  --normandie-secondary: #fdb813;
+  --normandie-accent: #e4002b;
+
+  /* Nouvelle Aquitaine */
+  --nouvelle_aquitaine-primary: #003366;
+  --nouvelle_aquitaine-secondary: #fdb813;
+  --nouvelle_aquitaine-accent: #e4002b;
+
+  /* Occitanie */
+  --occitanie-primary: #e4002b;
+  --occitanie-secondary: #fdb813;
+  --occitanie-accent: #003366;
+
+  /* PACA */
+  --paca-primary: #003366;
+  --paca-secondary: #fdb813;
+  --paca-accent: #e4002b;
+
+  /* PDDL */
+  --pddl-primary: #003366;
+  --pddl-secondary: #fdb813;
+  --pddl-accent: #e4002b;
+}
+
+/* Example usage */
+.aura-theme {
+  --primary-color: var(--aura-primary);
+  --secondary-color: var(--aura-secondary);
+  --accent-color: var(--aura-accent);
+}
+
+.bretagne-theme {
+  --primary-color: var(--bretagne-primary);
+  --secondary-color: var(--bretagne-secondary);
+  --accent-color: var(--bretagne-accent);
+}
+
+/* Add similar classes for other regions */

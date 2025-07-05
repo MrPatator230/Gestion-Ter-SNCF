@@ -1,0 +1,207 @@
+.container {
+  background-color: #0039a6;
+  color: white;
+  height: 100vh;
+  padding: 1rem 2rem;
+  display: auto;
+  font-family: 'Avenir', sans-serif;
+  flex-direction: column;
+  position: relative;
+}
+
+.header {
+  background-color: #0057b8;
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  font-weight: 900;
+  font-size: 3rem;
+  gap: 15px;
+  position: relative;
+}
+
+.headerIcon {
+  font-size: 3.6rem;
+  color: white;
+}
+
+.headerTitle {
+  flex-grow: 1;
+  color:rgb(255, 255, 255);
+  font-family: 'Avenir';
+  color: white;
+}
+
+.headerTime {
+  font-weight: 900;
+  font-size: 2.4rem;
+  color: white;
+  font-family: 'Avenir';
+}
+.icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  fill: white;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  margin-top: 2rem;
+  gap: 3rem;
+}
+
+.leftBox {
+  background-color: #0057b8;
+  border-radius: 0.5rem;
+  padding: 1.5rem 2rem;
+  width: 500px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.destinationWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.destination {
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+.trainNumber {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.statusBadge {
+  background-color: #007bff;
+  border-radius: 120px;
+  padding: 8px 12px; /* Increased vertical padding for better height */
+  color: white;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row; /* Align icon and text horizontally */
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  user-select: none;
+  font-size: 1.1rem;
+  width: 190px; /* Fixed width to match design */
+  height: 40px; /* Adjusted height for single line */
+  text-align: right; /* Align text to the right */
+  min-width: 170px;
+  max-width: 200px; /* Ensure it doesn't exceed this width */
+}
+
+.statusBadge svg {
+  align-self: right;
+  vertical-align: middle;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  height: 1.5rem !important;
+  width: 1.5rem !important;
+}
+
+.statusBadge i {
+  color: white;
+  font-size: 1.4rem;
+}
+
+.checkIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.departureLabel {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-top: 0rem;
+}
+
+.departureTime {
+  font-weight: 900;
+  font-size: 5rem;
+  color: #dfff00;
+}
+
+.rightBox {
+  flex: 1;
+  background-color: #0039a6;
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stationList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stationItem {
+  font-size: 2.5rem;
+  padding-left: 2.5rem;
+  position: relative;
+  margin-bottom: 0.8rem;
+  cursor: default;
+}
+
+.stationItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.8rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.highlightedStation {
+  background-color: #0057b8;
+  border-radius: 1rem;
+  padding-left: 2.5rem;
+  color: white;
+  font-weight: 700;
+}
+
+.currentStationIcon {
+  position: absolute;
+  left: 0.2rem;
+  top: 1.3rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  z-index: 1;
+}
+
+
+.platformBox {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #0039a6;
+  font-weight: 900;
+  font-size: 2.5rem;
+}
+
+.platformLabel {
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}

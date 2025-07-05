@@ -1,0 +1,15 @@
+.stationListContainer {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.connectorLine {
+  position: absolute;
+  left: 2rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2rem;
+  background-color: #0057b8;
+  border-radius: 3rem;
+  z-index: 0;
+}

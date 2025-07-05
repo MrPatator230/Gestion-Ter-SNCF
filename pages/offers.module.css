@@ -1,0 +1,215 @@
+.offersPage {
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 64px);
+}
+
+.journeyHeader h2 {
+  color: #000066;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.viaText {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+}
+
+.offersSection {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.offersList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.offerCard {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.offerCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.offerHeader {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trainInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.trainType {
+  font-weight: 600;
+  color: #000066;
+}
+
+.trainNumber {
+  color: #666;
+}
+
+.offerBody {
+  padding: 1.5rem;
+}
+
+.journeyTimes {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.departure, .arrival {
+  text-align: center;
+}
+
+.time {
+  font-weight: 600;
+  color: #000066;
+}
+
+.station {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.journeyDuration {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.durationLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #dee2e6;
+  z-index: 1;
+}
+
+.durationTime {
+  background: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  color: #666;
+  position: relative;
+  z-index: 2;
+}
+
+.viaStations {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.viaStations :global(.material-icons) {
+  font-size: 1rem;
+  color: #0F8548;
+}
+
+.stationsList {
+  position: relative;
+  padding: 1rem;
+}
+
+.stationRow {
+  display: grid;
+  grid-template-columns: 100px 1fr 80px;
+  align-items: center;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.stationRow.header {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.stationDot {
+  width: 12px;
+  height: 12px;
+  background-color: #ffd700;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+}
+
+.stationsList::before {
+  content: '';
+  position: absolute;
+  top: 4rem;
+  bottom: 2rem;
+  left: calc(100px + 1rem + 6px);
+  width: 2px;
+  background-color: #ffd700;
+  z-index: 1;
+}
+
+.track {
+  text-align: center;
+}
+
+.modalContent {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.modalHeader {
+  background-color: white;
+  border-bottom: none;
+}
+
+.offerActions {
+  padding: 1rem;
+  border-top: 1px solid #dee2e6;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalBody {
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .journeyTimes {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .journeyDuration {
+    display: none;
+  }
+
+  .journeyHeader h2 {
+    font-size: 1.25rem;
+  }
+}

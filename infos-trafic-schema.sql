@@ -1,0 +1,11 @@
+CREATE TABLE infos_trafic (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL,
+  start_date DATE,
+  end_date DATE,
+  description TEXT NOT NULL,
+  impact_type VARCHAR(50) NOT NULL,
+  impacted_trains JSON,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

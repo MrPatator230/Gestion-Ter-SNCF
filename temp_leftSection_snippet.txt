@@ -1,0 +1,9 @@
+<section className={styles.leftSection}>
+  <time className={styles.departureTime} dateTime={displayTime} style={{ color: '#dfff00', fontWeight: '900' }}>
+    {formatTimeHHmm(displayTime)}
+  </time>
+  <div className={styles.statusBadge}>
+    <i class="icons-checked icons-size-30px" aria-hidden="true"></i>
+    <span>À l'heure</span>
+  </div>
+</section>
