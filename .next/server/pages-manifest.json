@@ -1,0 +1,12 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/": "pages/index.js",
+  "/api/actualites": "pages/api/actualites.js",
+  "/api/track-assignments": "pages/api/track-assignments.js",
+  "/api/infos-trafic": "pages/api/infos-trafic.js",
+  "/api/entreprise": "pages/api/entreprise.js",
+  "/api/schedules/by-station": "pages/api/schedules/by-station.js",
+  "/afficheurs/afl/quais/departs": "pages/afficheurs/afl/quais/departs.js"
+}
