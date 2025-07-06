@@ -70,6 +70,13 @@ export default function Header() {
       >
         Horaires par gare
       </Link>
+      <Link 
+        href="/FH" 
+        className={`nav-link ${currentPath === '/FH' ? 'active' : ''}`}
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        Fiches Horaires
+      </Link>
       <></>
     </>
   );

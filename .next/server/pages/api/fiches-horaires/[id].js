@@ -1,0 +1,96 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(() => {
+var exports = {};
+exports.id = "pages/api/fiches-horaires/[id]";
+exports.ids = ["pages/api/fiches-horaires/[id]"];
+exports.modules = {
+
+/***/ "(api-node)/./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES_API&page=%2Fapi%2Ffiches-horaires%2F%5Bid%5D&preferredRegion=&absolutePagePath=.%2Fpages%2Fapi%2Ffiches-horaires%2F%5Bid%5D.js&middlewareConfigBase64=e30%3D!":
+/*!**********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES_API&page=%2Fapi%2Ffiches-horaires%2F%5Bid%5D&preferredRegion=&absolutePagePath=.%2Fpages%2Fapi%2Ffiches-horaires%2F%5Bid%5D.js&middlewareConfigBase64=e30%3D! ***!
+  \**********************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   config: () => (/* binding */ config),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__),\n/* harmony export */   routeModule: () => (/* binding */ routeModule)\n/* harmony export */ });\n/* harmony import */ var next_dist_server_route_modules_pages_api_module_compiled__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/dist/server/route-modules/pages-api/module.compiled */ \"(api-node)/./node_modules/next/dist/server/route-modules/pages-api/module.compiled.js\");\n/* harmony import */ var next_dist_server_route_modules_pages_api_module_compiled__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_route_modules_pages_api_module_compiled__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var next_dist_server_route_kind__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/dist/server/route-kind */ \"(api-node)/./node_modules/next/dist/server/route-kind.js\");\n/* harmony import */ var next_dist_build_templates_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/dist/build/templates/helpers */ \"(api-node)/./node_modules/next/dist/build/templates/helpers.js\");\n/* harmony import */ var _pages_api_fiches_horaires_id_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/api/fiches-horaires/[id].js */ \"(api-node)/./pages/api/fiches-horaires/[id].js\");\n\n\n\n// Import the userland code.\n\n// Re-export the handler (should be the default export).\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,next_dist_build_templates_helpers__WEBPACK_IMPORTED_MODULE_2__.hoist)(_pages_api_fiches_horaires_id_js__WEBPACK_IMPORTED_MODULE_3__, 'default'));\n// Re-export config.\nconst config = (0,next_dist_build_templates_helpers__WEBPACK_IMPORTED_MODULE_2__.hoist)(_pages_api_fiches_horaires_id_js__WEBPACK_IMPORTED_MODULE_3__, 'config');\n// Create and export the route module that will be consumed.\nconst routeModule = new next_dist_server_route_modules_pages_api_module_compiled__WEBPACK_IMPORTED_MODULE_0__.PagesAPIRouteModule({\n    definition: {\n        kind: next_dist_server_route_kind__WEBPACK_IMPORTED_MODULE_1__.RouteKind.PAGES_API,\n        page: \"/api/fiches-horaires/[id]\",\n        pathname: \"/api/fiches-horaires/[id]\",\n        // The following aren't used in production.\n        bundlePath: '',\n        filename: ''\n    },\n    userland: _pages_api_fiches_horaires_id_js__WEBPACK_IMPORTED_MODULE_3__\n});\n\n//# sourceMappingURL=pages-api.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaS1ub2RlKS8uL25vZGVfbW9kdWxlcy9uZXh0L2Rpc3QvYnVpbGQvd2VicGFjay9sb2FkZXJzL25leHQtcm91dGUtbG9hZGVyL2luZGV4LmpzP2tpbmQ9UEFHRVNfQVBJJnBhZ2U9JTJGYXBpJTJGZmljaGVzLWhvcmFpcmVzJTJGJTVCaWQlNUQmcHJlZmVycmVkUmVnaW9uPSZhYnNvbHV0ZVBhZ2VQYXRoPS4lMkZwYWdlcyUyRmFwaSUyRmZpY2hlcy1ob3JhaXJlcyUyRiU1QmlkJTVELmpzJm1pZGRsZXdhcmVDb25maWdCYXNlNjQ9ZTMwJTNEISIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7OztBQUErRjtBQUN2QztBQUNFO0FBQzFEO0FBQ2dFO0FBQ2hFO0FBQ0EsaUVBQWUsd0VBQUssQ0FBQyw2REFBUSxZQUFZLEVBQUM7QUFDMUM7QUFDTyxlQUFlLHdFQUFLLENBQUMsNkRBQVE7QUFDcEM7QUFDTyx3QkFBd0IseUdBQW1CO0FBQ2xEO0FBQ0EsY0FBYyxrRUFBUztBQUN2QjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsS0FBSztBQUNMLFlBQVk7QUFDWixDQUFDOztBQUVEIiwic291cmNlcyI6WyIiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgUGFnZXNBUElSb3V0ZU1vZHVsZSB9IGZyb20gXCJuZXh0L2Rpc3Qvc2VydmVyL3JvdXRlLW1vZHVsZXMvcGFnZXMtYXBpL21vZHVsZS5jb21waWxlZFwiO1xuaW1wb3J0IHsgUm91dGVLaW5kIH0gZnJvbSBcIm5leHQvZGlzdC9zZXJ2ZXIvcm91dGUta2luZFwiO1xuaW1wb3J0IHsgaG9pc3QgfSBmcm9tIFwibmV4dC9kaXN0L2J1aWxkL3RlbXBsYXRlcy9oZWxwZXJzXCI7XG4vLyBJbXBvcnQgdGhlIHVzZXJsYW5kIGNvZGUuXG5pbXBvcnQgKiBhcyB1c2VybGFuZCBmcm9tIFwiLi9wYWdlcy9hcGkvZmljaGVzLWhvcmFpcmVzL1tpZF0uanNcIjtcbi8vIFJlLWV4cG9ydCB0aGUgaGFuZGxlciAoc2hvdWxkIGJlIHRoZSBkZWZhdWx0IGV4cG9ydCkuXG5leHBvcnQgZGVmYXVsdCBob2lzdCh1c2VybGFuZCwgJ2RlZmF1bHQnKTtcbi8vIFJlLWV4cG9ydCBjb25maWcuXG5leHBvcnQgY29uc3QgY29uZmlnID0gaG9pc3QodXNlcmxhbmQsICdjb25maWcnKTtcbi8vIENyZWF0ZSBhbmQgZXhwb3J0IHRoZSByb3V0ZSBtb2R1bGUgdGhhdCB3aWxsIGJlIGNvbnN1bWVkLlxuZXhwb3J0IGNvbnN0IHJvdXRlTW9kdWxlID0gbmV3IFBhZ2VzQVBJUm91dGVNb2R1bGUoe1xuICAgIGRlZmluaXRpb246IHtcbiAgICAgICAga2luZDogUm91dGVLaW5kLlBBR0VTX0FQSSxcbiAgICAgICAgcGFnZTogXCIvYXBpL2ZpY2hlcy1ob3JhaXJlcy9baWRdXCIsXG4gICAgICAgIHBhdGhuYW1lOiBcIi9hcGkvZmljaGVzLWhvcmFpcmVzL1tpZF1cIixcbiAgICAgICAgLy8gVGhlIGZvbGxvd2luZyBhcmVuJ3QgdXNlZCBpbiBwcm9kdWN0aW9uLlxuICAgICAgICBidW5kbGVQYXRoOiAnJyxcbiAgICAgICAgZmlsZW5hbWU6ICcnXG4gICAgfSxcbiAgICB1c2VybGFuZFxufSk7XG5cbi8vIyBzb3VyY2VNYXBwaW5nVVJMPXBhZ2VzLWFwaS5qcy5tYXAiXSwibmFtZXMiOltdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(api-node)/./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES_API&page=%2Fapi%2Ffiches-horaires%2F%5Bid%5D&preferredRegion=&absolutePagePath=.%2Fpages%2Fapi%2Ffiches-horaires%2F%5Bid%5D.js&middlewareConfigBase64=e30%3D!\n");
+
+/***/ }),
+
+/***/ "(api-node)/./pages/api/fiches-horaires/[id].js":
+/*!*******************************************!*\
+  !*** ./pages/api/fiches-horaires/[id].js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ handler)\n/* harmony export */ });\n/* harmony import */ var _utils_db__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../utils/db */ \"(api-node)/./utils/db.js\");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ \"fs\");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! path */ \"path\");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\nasync function handler(req, res) {\n    const { id } = req.query;\n    if (req.method === 'DELETE') {\n        try {\n            // Get fiche horaire metadata to find file path\n            const results = await (0,_utils_db__WEBPACK_IMPORTED_MODULE_0__.query)('SELECT * FROM fiches_horaires WHERE id = ?', [\n                id\n            ]);\n            if (results.length === 0) {\n                return res.status(404).json({\n                    error: 'Fiche horaire non trouvée'\n                });\n            }\n            const fiche = results[0];\n            // Delete file from filesystem\n            const filePath = path__WEBPACK_IMPORTED_MODULE_2___default().join(process.cwd(), fiche.file_path);\n            console.log('Deleting file at path:', filePath);\n            if (fs__WEBPACK_IMPORTED_MODULE_1___default().existsSync(filePath)) {\n                try {\n                    await fs__WEBPACK_IMPORTED_MODULE_1___default().promises.unlink(filePath);\n                    console.log('File deleted successfully');\n                } catch (unlinkError) {\n                    console.error('Error deleting file:', unlinkError);\n                    return res.status(500).json({\n                        error: 'Erreur lors de la suppression du fichier'\n                    });\n                }\n            } else {\n                console.warn('File does not exist:', filePath);\n            }\n            // Delete metadata from DB\n            await (0,_utils_db__WEBPACK_IMPORTED_MODULE_0__.query)('DELETE FROM fiches_horaires WHERE id = ?', [\n                id\n            ]);\n            res.status(200).json({\n                message: 'Fiche horaire supprimée avec succès'\n            });\n        } catch (error) {\n            console.error('Error deleting fiche horaire:', error);\n            res.status(500).json({\n                error: 'Erreur lors de la suppression de la fiche horaire'\n            });\n        }\n    } else {\n        res.setHeader('Allow', [\n            'DELETE'\n        ]);\n        res.status(405).end(`Méthode ${req.method} non autorisée`);\n    }\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaS1ub2RlKS8uL3BhZ2VzL2FwaS9maWNoZXMtaG9yYWlyZXMvW2lkXS5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBMEM7QUFDdEI7QUFDSTtBQUVULGVBQWVHLFFBQVFDLEdBQUcsRUFBRUMsR0FBRztJQUM1QyxNQUFNLEVBQUVDLEVBQUUsRUFBRSxHQUFHRixJQUFJSixLQUFLO0lBRXhCLElBQUlJLElBQUlHLE1BQU0sS0FBSyxVQUFVO1FBQzNCLElBQUk7WUFDRiwrQ0FBK0M7WUFDL0MsTUFBTUMsVUFBVSxNQUFNUixnREFBS0EsQ0FBQyw4Q0FBOEM7Z0JBQUNNO2FBQUc7WUFDOUUsSUFBSUUsUUFBUUMsTUFBTSxLQUFLLEdBQUc7Z0JBQ3hCLE9BQU9KLElBQUlLLE1BQU0sQ0FBQyxLQUFLQyxJQUFJLENBQUM7b0JBQUVDLE9BQU87Z0JBQTRCO1lBQ25FO1lBQ0EsTUFBTUMsUUFBUUwsT0FBTyxDQUFDLEVBQUU7WUFFeEIsOEJBQThCO1lBQzlCLE1BQU1NLFdBQVdaLGdEQUFTLENBQUNjLFFBQVFDLEdBQUcsSUFBSUosTUFBTUssU0FBUztZQUN6REMsUUFBUUMsR0FBRyxDQUFDLDBCQUEwQk47WUFDdEMsSUFBSWIsb0RBQWEsQ0FBQ2EsV0FBVztnQkFDM0IsSUFBSTtvQkFDRixNQUFNYixrREFBVyxDQUFDc0IsTUFBTSxDQUFDVDtvQkFDekJLLFFBQVFDLEdBQUcsQ0FBQztnQkFDZCxFQUFFLE9BQU9JLGFBQWE7b0JBQ3BCTCxRQUFRUCxLQUFLLENBQUMsd0JBQXdCWTtvQkFDdEMsT0FBT25CLElBQUlLLE1BQU0sQ0FBQyxLQUFLQyxJQUFJLENBQUM7d0JBQUVDLE9BQU87b0JBQTJDO2dCQUNsRjtZQUNGLE9BQU87Z0JBQ0xPLFFBQVFNLElBQUksQ0FBQyx3QkFBd0JYO1lBQ3ZDO1lBRUEsMEJBQTBCO1lBQzFCLE1BQU1kLGdEQUFLQSxDQUFDLDRDQUE0QztnQkFBQ007YUFBRztZQUU1REQsSUFBSUssTUFBTSxDQUFDLEtBQUtDLElBQUksQ0FBQztnQkFBRWUsU0FBUztZQUFzQztRQUN4RSxFQUFFLE9BQU9kLE9BQU87WUFDZE8sUUFBUVAsS0FBSyxDQUFDLGlDQUFpQ0E7WUFDL0NQLElBQUlLLE1BQU0sQ0FBQyxLQUFLQyxJQUFJLENBQUM7Z0JBQUVDLE9BQU87WUFBb0Q7UUFDcEY7SUFDRixPQUFPO1FBQ0xQLElBQUlzQixTQUFTLENBQUMsU0FBUztZQUFDO1NBQVM7UUFDakN0QixJQUFJSyxNQUFNLENBQUMsS0FBS2tCLEdBQUcsQ0FBQyxDQUFDLFFBQVEsRUFBRXhCLElBQUlHLE1BQU0sQ0FBQyxjQUFjLENBQUM7SUFDM0Q7QUFDRiIsInNvdXJjZXMiOlsiL1VzZXJzL21hdGhpc2dyaWxsb3QvRG9jdW1lbnRzL2RlzIF2ZWxvcHBlbWVudCBXRUIvVGVyLUdlc3Rpb24vcGFnZXMvYXBpL2ZpY2hlcy1ob3JhaXJlcy9baWRdLmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHF1ZXJ5IH0gZnJvbSAnLi4vLi4vLi4vdXRpbHMvZGInO1xuaW1wb3J0IGZzIGZyb20gJ2ZzJztcbmltcG9ydCBwYXRoIGZyb20gJ3BhdGgnO1xuXG5leHBvcnQgZGVmYXVsdCBhc3luYyBmdW5jdGlvbiBoYW5kbGVyKHJlcSwgcmVzKSB7XG4gIGNvbnN0IHsgaWQgfSA9IHJlcS5xdWVyeTtcblxuICBpZiAocmVxLm1ldGhvZCA9PT0gJ0RFTEVURScpIHtcbiAgICB0cnkge1xuICAgICAgLy8gR2V0IGZpY2hlIGhvcmFpcmUgbWV0YWRhdGEgdG8gZmluZCBmaWxlIHBhdGhcbiAgICAgIGNvbnN0IHJlc3VsdHMgPSBhd2FpdCBxdWVyeSgnU0VMRUNUICogRlJPTSBmaWNoZXNfaG9yYWlyZXMgV0hFUkUgaWQgPSA/JywgW2lkXSk7XG4gICAgICBpZiAocmVzdWx0cy5sZW5ndGggPT09IDApIHtcbiAgICAgICAgcmV0dXJuIHJlcy5zdGF0dXMoNDA0KS5qc29uKHsgZXJyb3I6ICdGaWNoZSBob3JhaXJlIG5vbiB0cm91dsOpZScgfSk7XG4gICAgICB9XG4gICAgICBjb25zdCBmaWNoZSA9IHJlc3VsdHNbMF07XG5cbiAgICAgIC8vIERlbGV0ZSBmaWxlIGZyb20gZmlsZXN5c3RlbVxuICAgICAgY29uc3QgZmlsZVBhdGggPSBwYXRoLmpvaW4ocHJvY2Vzcy5jd2QoKSwgZmljaGUuZmlsZV9wYXRoKTtcbiAgICAgIGNvbnNvbGUubG9nKCdEZWxldGluZyBmaWxlIGF0IHBhdGg6JywgZmlsZVBhdGgpO1xuICAgICAgaWYgKGZzLmV4aXN0c1N5bmMoZmlsZVBhdGgpKSB7XG4gICAgICAgIHRyeSB7XG4gICAgICAgICAgYXdhaXQgZnMucHJvbWlzZXMudW5saW5rKGZpbGVQYXRoKTtcbiAgICAgICAgICBjb25zb2xlLmxvZygnRmlsZSBkZWxldGVkIHN1Y2Nlc3NmdWxseScpO1xuICAgICAgICB9IGNhdGNoICh1bmxpbmtFcnJvcikge1xuICAgICAgICAgIGNvbnNvbGUuZXJyb3IoJ0Vycm9yIGRlbGV0aW5nIGZpbGU6JywgdW5saW5rRXJyb3IpO1xuICAgICAgICAgIHJldHVybiByZXMuc3RhdHVzKDUwMCkuanNvbih7IGVycm9yOiAnRXJyZXVyIGxvcnMgZGUgbGEgc3VwcHJlc3Npb24gZHUgZmljaGllcicgfSk7XG4gICAgICAgIH1cbiAgICAgIH0gZWxzZSB7XG4gICAgICAgIGNvbnNvbGUud2FybignRmlsZSBkb2VzIG5vdCBleGlzdDonLCBmaWxlUGF0aCk7XG4gICAgICB9XG5cbiAgICAgIC8vIERlbGV0ZSBtZXRhZGF0YSBmcm9tIERCXG4gICAgICBhd2FpdCBxdWVyeSgnREVMRVRFIEZST00gZmljaGVzX2hvcmFpcmVzIFdIRVJFIGlkID0gPycsIFtpZF0pO1xuXG4gICAgICByZXMuc3RhdHVzKDIwMCkuanNvbih7IG1lc3NhZ2U6ICdGaWNoZSBob3JhaXJlIHN1cHByaW3DqWUgYXZlYyBzdWNjw6hzJyB9KTtcbiAgICB9IGNhdGNoIChlcnJvcikge1xuICAgICAgY29uc29sZS5lcnJvcignRXJyb3IgZGVsZXRpbmcgZmljaGUgaG9yYWlyZTonLCBlcnJvcik7XG4gICAgICByZXMuc3RhdHVzKDUwMCkuanNvbih7IGVycm9yOiAnRXJyZXVyIGxvcnMgZGUgbGEgc3VwcHJlc3Npb24gZGUgbGEgZmljaGUgaG9yYWlyZScgfSk7XG4gICAgfVxuICB9IGVsc2Uge1xuICAgIHJlcy5zZXRIZWFkZXIoJ0FsbG93JywgWydERUxFVEUnXSk7XG4gICAgcmVzLnN0YXR1cyg0MDUpLmVuZChgTcOpdGhvZGUgJHtyZXEubWV0aG9kfSBub24gYXV0b3Jpc8OpZWApO1xuICB9XG59XG4iXSwibmFtZXMiOlsicXVlcnkiLCJmcyIsInBhdGgiLCJoYW5kbGVyIiwicmVxIiwicmVzIiwiaWQiLCJtZXRob2QiLCJyZXN1bHRzIiwibGVuZ3RoIiwic3RhdHVzIiwianNvbiIsImVycm9yIiwiZmljaGUiLCJmaWxlUGF0aCIsImpvaW4iLCJwcm9jZXNzIiwiY3dkIiwiZmlsZV9wYXRoIiwiY29uc29sZSIsImxvZyIsImV4aXN0c1N5bmMiLCJwcm9taXNlcyIsInVubGluayIsInVubGlua0Vycm9yIiwid2FybiIsIm1lc3NhZ2UiLCJzZXRIZWFkZXIiLCJlbmQiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(api-node)/./pages/api/fiches-horaires/[id].js\n");
+
+/***/ }),
+
+/***/ "(api-node)/./utils/db.js":
+/*!*********************!*\
+  !*** ./utils/db.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var mysql2_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mysql2/promise */ \"mysql2/promise\");\n/* harmony import */ var mysql2_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mysql2_promise__WEBPACK_IMPORTED_MODULE_0__);\n\nconst pool = mysql2_promise__WEBPACK_IMPORTED_MODULE_0___default().createPool({\n    host: process.env.MYSQL_HOST || '127.0.0.1',\n    port: process.env.MYSQL_PORT || 8889,\n    user: process.env.MYSQL_USER || 'root',\n    password: process.env.MYSQL_PASSWORD || 'root',\n    database: process.env.MYSQL_DATABASE || 'SNCF_ter_bfc',\n    waitForConnections: true,\n    queueLimit: 1000\n});\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (pool);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaS1ub2RlKS8uL3V0aWxzL2RiLmpzIiwibWFwcGluZ3MiOiI7Ozs7OztBQUFtQztBQUVuQyxNQUFNQyxPQUFPRCxnRUFBZ0IsQ0FBQztJQUM1QkcsTUFBTUMsUUFBUUMsR0FBRyxDQUFDQyxVQUFVLElBQUk7SUFDaENDLE1BQU1ILFFBQVFDLEdBQUcsQ0FBQ0csVUFBVSxJQUFJO0lBQ2hDQyxNQUFNTCxRQUFRQyxHQUFHLENBQUNLLFVBQVUsSUFBSTtJQUNoQ0MsVUFBVVAsUUFBUUMsR0FBRyxDQUFDTyxjQUFjLElBQUk7SUFDeENDLFVBQVVULFFBQVFDLEdBQUcsQ0FBQ1MsY0FBYyxJQUFJO0lBQ3hDQyxvQkFBb0I7SUFDcEJDLFlBQVk7QUFDZDtBQUVBLGlFQUFlZixJQUFJQSxFQUFDIiwic291cmNlcyI6WyIvVXNlcnMvbWF0aGlzZ3JpbGxvdC9Eb2N1bWVudHMvZGXMgXZlbG9wcGVtZW50IFdFQi9UZXItR2VzdGlvbi91dGlscy9kYi5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgbXlzcWwgZnJvbSAnbXlzcWwyL3Byb21pc2UnO1xuXG5jb25zdCBwb29sID0gbXlzcWwuY3JlYXRlUG9vbCh7XG4gIGhvc3Q6IHByb2Nlc3MuZW52Lk1ZU1FMX0hPU1QgfHwgJzEyNy4wLjAuMScsXG4gIHBvcnQ6IHByb2Nlc3MuZW52Lk1ZU1FMX1BPUlQgfHwgODg4OSxcbiAgdXNlcjogcHJvY2Vzcy5lbnYuTVlTUUxfVVNFUiB8fCAncm9vdCcsXG4gIHBhc3N3b3JkOiBwcm9jZXNzLmVudi5NWVNRTF9QQVNTV09SRCB8fCAncm9vdCcsXG4gIGRhdGFiYXNlOiBwcm9jZXNzLmVudi5NWVNRTF9EQVRBQkFTRSB8fCAnU05DRl90ZXJfYmZjJyxcbiAgd2FpdEZvckNvbm5lY3Rpb25zOiB0cnVlLFxuICBxdWV1ZUxpbWl0OiAxMDAwLFxufSk7XG5cbmV4cG9ydCBkZWZhdWx0IHBvb2w7XG4iXSwibmFtZXMiOlsibXlzcWwiLCJwb29sIiwiY3JlYXRlUG9vbCIsImhvc3QiLCJwcm9jZXNzIiwiZW52IiwiTVlTUUxfSE9TVCIsInBvcnQiLCJNWVNRTF9QT1JUIiwidXNlciIsIk1ZU1FMX1VTRVIiLCJwYXNzd29yZCIsIk1ZU1FMX1BBU1NXT1JEIiwiZGF0YWJhc2UiLCJNWVNRTF9EQVRBQkFTRSIsIndhaXRGb3JDb25uZWN0aW9ucyIsInF1ZXVlTGltaXQiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(api-node)/./utils/db.js\n");
+
+/***/ }),
+
+/***/ "fs":
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/***/ ((module) => {
+
+module.exports = require("fs");
+
+/***/ }),
+
+/***/ "mysql2/promise":
+/*!*********************************!*\
+  !*** external "mysql2/promise" ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = require("mysql2/promise");
+
+/***/ }),
+
+/***/ "next/dist/compiled/next-server/pages-api.runtime.dev.js":
+/*!**************************************************************************!*\
+  !*** external "next/dist/compiled/next-server/pages-api.runtime.dev.js" ***!
+  \**************************************************************************/
+/***/ ((module) => {
+
+module.exports = require("next/dist/compiled/next-server/pages-api.runtime.dev.js");
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/***/ ((module) => {
+
+module.exports = require("path");
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../../../webpack-api-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next"], () => (__webpack_exec__("(api-node)/./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES_API&page=%2Fapi%2Ffiches-horaires%2F%5Bid%5D&preferredRegion=&absolutePagePath=.%2Fpages%2Fapi%2Ffiches-horaires%2F%5Bid%5D.js&middlewareConfigBase64=e30%3D!")));
+module.exports = __webpack_exports__;
+
+})();
