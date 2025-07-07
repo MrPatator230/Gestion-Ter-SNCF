@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Header from '../components/Header';
 import { SettingsContext } from '../contexts/SettingsContext';
 import buttonStyles from '../styles/buttons.module.css';
 import Layout from '../components/Layout';
@@ -189,7 +188,8 @@ function ActualitesWidget({ onSelectPost }) {
   );
 }
 
-export default function Home() {
+export default function Home(props) {
+  const { darkMode, toggleDarkMode } = props;
   const { logoUrl } = useContext(SettingsContext);
   const displayName = logoNameMap[logoUrl] || 'SNCF TER Mobigo';
 
@@ -202,7 +202,7 @@ export default function Home() {
   return (
     <>
       <div className="main-wrapper">
-        <Layout>
+        <Layout darkMode={darkMode} toggleDarkMode={toggleDarkMode}>
           <main className="main-container">
             <div className="container-fluid">
               <h1 className="sncf-title mb-4">Bienvenue sur {displayName}</h1>
@@ -258,7 +258,6 @@ export default function Home() {
             </div>
           </main>
         </Layout>
-     
       </div>
 
       {/* Modal for Actualité */}

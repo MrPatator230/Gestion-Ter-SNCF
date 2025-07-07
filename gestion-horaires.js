@@ -76,14 +76,23 @@ export default function GestionHoraires() {
             </tr>
           </thead>
           <tbody>
-            {schedules.map(schedule => {
+            {schedules.map((schedule, index) => {
               const trainType = schedule.trainType || 'TER';
               const logoSrc = trainTypeLogos[trainType] || '/images/sncf-logo.png';
               return (
                 <tr key={schedule.id} style={schedule.isCancelled ? { textDecoration: 'line-through', color: 'red' } : {}}>
-                  <td style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <img src={logoSrc} alt={trainType} style={{ height: '24px', width: 'auto' }} />
-                    <span>{schedule.trainNumber}</span>
+                  <td style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                    {showTrainType ? (
+                      <>
+                        <img src={logoSrc} alt={trainType} style={{ height: '24px', width: 'auto' }} />
+                        <span>{schedule.trainNumber}</span>
+                      </>
+                    ) : (
+                      <>
+                        <span style={{ fontWeight: 'bold' }}>{statusText}</span>
+                        <span>{schedule.trainNumber}</span>
+                      </>
+                    )}
                   </td>
                   <td>{schedule.departureStation}</td>
                   <td>{schedule.arrivalStation}</td>

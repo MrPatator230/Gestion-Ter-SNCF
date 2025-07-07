@@ -2,7 +2,12 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/afficheurs/classiques/departs": "pages/afficheurs/classiques/departs.js",
+  "/api/track-assignments": "pages/api/track-assignments.js",
+  "/api/entreprise": "pages/api/entreprise.js",
+  "/api/infos-trafic": "pages/api/infos-trafic.js",
+  "/api/actualites": "pages/api/actualites.js",
   "/FH": "pages/FH.js",
-  "/admin/fiches-horaires": "pages/admin/fiches-horaires.js",
-  "/admin": "pages/admin.js"
+  "/api/fiches-horaires": "pages/api/fiches-horaires.js",
+  "/": "pages/index.js"
 }

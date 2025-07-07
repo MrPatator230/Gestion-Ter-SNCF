@@ -84,13 +84,17 @@ export default function FichesHoraires() {
   <p>Aucune fiche horaire disponible.</p>
 ) : (
   <ul className="list-group">
-    {fiches.map(fiche => {
+{fiches.map(fiche => {
       // Remove brackets [] from display name
       const cleanDisplayName = fiche.display_name.replace(/[\[\]]/g, '');
-const fileName = fiche.file_path.split('/').pop();
-const fileHref = `/fiches-horaires/${fileName}`;
+
+      // Remove trailing numeric ID before file extension in filename
+      const originalFileName = fiche.file_path.split('/').pop();
+      const fileName = originalFileName.replace(/-\d+(?=\.[^.]+$)/, '');
+      const fileHref = `/fiches-horaires/${fileName}`;
+
       return (
-        <li key={fiche.id} className="list-group-item">
+        <li key={fiche.id} className="list-group-item d-flex justify-content-between align-items-center">
           <a
             href={fileHref}
             target="_blank"
@@ -98,6 +102,13 @@ const fileHref = `/fiches-horaires/${fileName}`;
           >
             {cleanDisplayName}
           </a>
+          <button
+            type="button"
+            className="btn btn-primary btn-sm"
+            onClick={() => window.open(fileHref, '_blank')}
+          >
+            Visualiser PDF
+          </button>
         </li>
       );
     })}
