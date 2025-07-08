@@ -85,11 +85,27 @@ export default function FichesHoraires() {
 ) : (
   <ul className="list-group">
 {fiches.map(fiche => {
-      // Remove brackets [] from display name
-      const cleanDisplayName = fiche.display_name.replace(/[\[\]]/g, '');
+      // Parse display_name JSON string if possible, else fallback to string cleaning
+      let cleanDisplayName = fiche.display_name;
+      try {
+        const parsedName = JSON.parse(fiche.display_name);
+        if (Array.isArray(parsedName)) {
+          cleanDisplayName = parsedName.join(' - ');
+        } else if (typeof parsedName === 'string') {
+          cleanDisplayName = parsedName;
+        }
+      } catch {
+        cleanDisplayName = fiche.display_name.replace(/[\[\]"]/g, '');
+      }
+
+      // Remove "public/" prefix from file_path if present
+      let filePath = fiche.file_path;
+      if (filePath.startsWith('public/')) {
+        filePath = filePath.substring('public/'.length);
+      }
 
       // Remove trailing numeric ID before file extension in filename
-      const originalFileName = fiche.file_path.split('/').pop();
+      const originalFileName = filePath.split('/').pop();
       const fileName = originalFileName.replace(/-\d+(?=\.[^.]+$)/, '');
       const fileHref = `/fiches-horaires/${fileName}`;
 
