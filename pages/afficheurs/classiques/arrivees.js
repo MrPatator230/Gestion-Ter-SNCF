@@ -2,10 +2,10 @@ import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styles from './arrivals.module.css';
-import { getStationSchedules, filterSchedulesByType, sortSchedulesByTime, getTrainStatus, getStationTime } from '../../utils/scheduleUtils';
-import { useTrackAssignments } from '../../src/contexts/TrackAssignmentContext';
+import { getStationSchedules, filterSchedulesByType, sortSchedulesByTime, getTrainStatus, getStationTime } from '../../../utils/scheduleUtils';
+import { useTrackAssignments } from '../../../src/contexts/TrackAssignmentContext';
 import Link from 'next/link';
-import { SettingsContext } from '../../contexts/SettingsContext';
+import { SettingsContext } from '../../../contexts/SettingsContext';
 
 // Helper function to get current day string in English (e.g., 'Monday')
 const getCurrentDay = () => {

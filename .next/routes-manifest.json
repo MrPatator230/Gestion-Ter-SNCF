@@ -1,0 +1,418 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "dynamicRoutes": [
+    {
+      "page": "/actualites/[id]",
+      "regex": "^/actualites/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/actualites/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/admin/[station]",
+      "regex": "^/admin/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPstation": "nxtPstation"
+      },
+      "namedRegex": "^/admin/(?<nxtPstation>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/actualites/[id]",
+      "regex": "^/api/actualites/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/actualites/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/fiches-horaires/[id]",
+      "regex": "^/api/fiches\\-horaires/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/fiches\\-horaires/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/infos-trafic/[id]",
+      "regex": "^/api/infos\\-trafic/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/infos\\-trafic/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/materiels-roulants/[id]",
+      "regex": "^/api/materiels\\-roulants/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/materiels\\-roulants/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/schedule-folders/[id]",
+      "regex": "^/api/schedule\\-folders/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/schedule\\-folders/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/schedules/[id]",
+      "regex": "^/api/schedules/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/schedules/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/ticket-types/[id]",
+      "regex": "^/api/ticket\\-types/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/ticket\\-types/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/horaires-par-gare/[station]",
+      "regex": "^/horaires\\-par\\-gare/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPstation": "nxtPstation"
+      },
+      "namedRegex": "^/horaires\\-par\\-gare/(?<nxtPstation>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/FH",
+      "regex": "^/FH(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/FH(?:/)?$"
+    },
+    {
+      "page": "/abonnements-et-billets",
+      "regex": "^/abonnements\\-et\\-billets(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/abonnements\\-et\\-billets(?:/)?$"
+    },
+    {
+      "page": "/actualites",
+      "regex": "^/actualites(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/actualites(?:/)?$"
+    },
+    {
+      "page": "/admin",
+      "regex": "^/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin(?:/)?$"
+    },
+    {
+      "page": "/admin/StationForm",
+      "regex": "^/admin/StationForm(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/StationForm(?:/)?$"
+    },
+    {
+      "page": "/admin/StationsList",
+      "regex": "^/admin/StationsList(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/StationsList(?:/)?$"
+    },
+    {
+      "page": "/admin/actualites",
+      "regex": "^/admin/actualites(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/actualites(?:/)?$"
+    },
+    {
+      "page": "/admin/admin-profile",
+      "regex": "^/admin/admin\\-profile(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/admin\\-profile(?:/)?$"
+    },
+    {
+      "page": "/admin/affichage-voyageurs",
+      "regex": "^/admin/affichage\\-voyageurs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/affichage\\-voyageurs(?:/)?$"
+    },
+    {
+      "page": "/admin/attribution-voie",
+      "regex": "^/admin/attribution\\-voie(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/attribution\\-voie(?:/)?$"
+    },
+    {
+      "page": "/admin/banque-de-sons",
+      "regex": "^/admin/banque\\-de\\-sons(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/banque\\-de\\-sons(?:/)?$"
+    },
+    {
+      "page": "/admin/billetique",
+      "regex": "^/admin/billetique(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/billetique(?:/)?$"
+    },
+    {
+      "page": "/admin/compositions-trains",
+      "regex": "^/admin/compositions\\-trains(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/compositions\\-trains(?:/)?$"
+    },
+    {
+      "page": "/admin/conception-annonce",
+      "regex": "^/admin/conception\\-annonce(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/conception\\-annonce(?:/)?$"
+    },
+    {
+      "page": "/admin/entreprise",
+      "regex": "^/admin/entreprise(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/entreprise(?:/)?$"
+    },
+    {
+      "page": "/admin/fiches-horaires",
+      "regex": "^/admin/fiches\\-horaires(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/fiches\\-horaires(?:/)?$"
+    },
+    {
+      "page": "/admin/gestion-actualites",
+      "regex": "^/admin/gestion\\-actualites(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/gestion\\-actualites(?:/)?$"
+    },
+    {
+      "page": "/admin/gestion-horaires",
+      "regex": "^/admin/gestion\\-horaires(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/gestion\\-horaires(?:/)?$"
+    },
+    {
+      "page": "/admin/horaires",
+      "regex": "^/admin/horaires(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/horaires(?:/)?$"
+    },
+    {
+      "page": "/admin/info-trafics",
+      "regex": "^/admin/info\\-trafics(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/info\\-trafics(?:/)?$"
+    },
+    {
+      "page": "/admin/liste-annonces",
+      "regex": "^/admin/liste\\-annonces(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/liste\\-annonces(?:/)?$"
+    },
+    {
+      "page": "/admin/materiels-roulants",
+      "regex": "^/admin/materiels\\-roulants(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/materiels\\-roulants(?:/)?$"
+    },
+    {
+      "page": "/admin/sauvegarde",
+      "regex": "^/admin/sauvegarde(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/sauvegarde(?:/)?$"
+    },
+    {
+      "page": "/admin/stations",
+      "regex": "^/admin/stations(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/stations(?:/)?$"
+    },
+    {
+      "page": "/admin/type-horaires",
+      "regex": "^/admin/type\\-horaires(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/type\\-horaires(?:/)?$"
+    },
+    {
+      "page": "/admin/update",
+      "regex": "^/admin/update(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/update(?:/)?$"
+    },
+    {
+      "page": "/admin/verifier-horaires",
+      "regex": "^/admin/verifier\\-horaires(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/verifier\\-horaires(?:/)?$"
+    },
+    {
+      "page": "/afficheur",
+      "regex": "^/afficheur(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/afficheur(?:/)?$"
+    },
+    {
+      "page": "/afficheurs",
+      "regex": "^/afficheurs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/afficheurs(?:/)?$"
+    },
+    {
+      "page": "/afficheurs/afl/Infos",
+      "regex": "^/afficheurs/afl/Infos(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/afficheurs/afl/Infos(?:/)?$"
+    },
+    {
+      "page": "/afficheurs/afl/arrivees",
+      "regex": "^/afficheurs/afl/arrivees(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/afficheurs/afl/arrivees(?:/)?$"
+    },
+    {
+      "page": "/afficheurs/afl/departs",
+      "regex": "^/afficheurs/afl/departs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/afficheurs/afl/departs(?:/)?$"
+    },
+    {
+      "page": "/afficheurs/afl/quais/arrivees",
+      "regex": "^/afficheurs/afl/quais/arrivees(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/afficheurs/afl/quais/arrivees(?:/)?$"
+    },
+    {
+      "page": "/afficheurs/afl/quais/departs",
+      "regex": "^/afficheurs/afl/quais/departs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/afficheurs/afl/quais/departs(?:/)?$"
+    },
+    {
+      "page": "/afficheurs/classiques/arrivees",
+      "regex": "^/afficheurs/classiques/arrivees(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/afficheurs/classiques/arrivees(?:/)?$"
+    },
+    {
+      "page": "/afficheurs/classiques/departs",
+      "regex": "^/afficheurs/classiques/departs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/afficheurs/classiques/departs(?:/)?$"
+    },
+    {
+      "page": "/client",
+      "regex": "^/client(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/client(?:/)?$"
+    },
+    {
+      "page": "/client/profile",
+      "regex": "^/client/profile(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/client/profile(?:/)?$"
+    },
+    {
+      "page": "/client/reservations",
+      "regex": "^/client/reservations(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/client/reservations(?:/)?$"
+    },
+    {
+      "page": "/download",
+      "regex": "^/download(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/download(?:/)?$"
+    },
+    {
+      "page": "/download-workspace",
+      "regex": "^/download\\-workspace(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/download\\-workspace(?:/)?$"
+    },
+    {
+      "page": "/horaires-par-gare",
+      "regex": "^/horaires\\-par\\-gare(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/horaires\\-par\\-gare(?:/)?$"
+    },
+    {
+      "page": "/horaires-par-gare/station.new",
+      "regex": "^/horaires\\-par\\-gare/station\\.new(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/horaires\\-par\\-gare/station\\.new(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/offers",
+      "regex": "^/offers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/offers(?:/)?$"
+    },
+    {
+      "page": "/panier",
+      "regex": "^/panier(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/panier(?:/)?$"
+    },
+    {
+      "page": "/register",
+      "regex": "^/register(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/register(?:/)?$"
+    },
+    {
+      "page": "/verification-trajets",
+      "regex": "^/verification\\-trajets(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/verification\\-trajets(?:/)?$"
+    },
+    {
+      "page": "/verifier-horaires",
+      "regex": "^/verifier\\-horaires(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/verifier\\-horaires(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "RSC",
+    "varyHeader": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch",
+    "prefetchHeader": "Next-Router-Prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "Next-Router-Segment-Prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  },
+  "rewrites": []
+}
