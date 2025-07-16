@@ -1,0 +1,104 @@
+.clockContainer {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+    align-items: baseline;
+    background-color: #003366;
+    color: white;
+    padding: 10px 20px;
+    font-family: 'Achemine';
+    font-weight: 900;
+    font-size: 1rem;
+    width: 200px;
+    border-radius: 10px;
+    border: 5px solid white;
+}
+
+.timeDisplay {
+  font-family: 'Achemine', sans-serif;
+  font-size: 2.0rem;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 2px;
+}
+
+.seconds {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f5a623;
+  margin-left: 15px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .clockContainer {
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 15px;
+  }
+  
+  .timeDisplay {
+    font-size: 2rem;
+  }
+  
+  .seconds {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .clockContainer {
+    bottom: 5px;
+    right: 5px;
+    padding: 5px 10px;
+  }
+  
+  .timeDisplay {
+    font-size: 1.5rem;
+  }
+  
+  .seconds {
+    font-size: 1.2rem;
+  }
+}
+.clockContainer {
+    display: flex;
+    align-items: baseline;
+    background-color: #003366;
+    color: white;
+    padding: 10px 20px;
+    font-family: 'Achemine';
+    font-weight: 900;
+    font-size: 1rem;
+    width: 200px;
+    border-radius: 10px;
+    border: 5px solid white;
+}
+.footerClock {
+   width: 200px;
+  height: auto;
+   border: 2px solid white;
+   padding: 0.5rem 1.5rem;
+   padding-bottom: 90%;
+   padding-top: 59%;
+   border-radius: 8px;
+   font-size: 2rem;
+   font-weight: bold;
+  z-index: 10;
+ }
+
+.clockTime {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+}
+.clockSeconds {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #f5a623;
+  margin-left: 15px;
+}
+.seconds {
+    color: orange;
+}

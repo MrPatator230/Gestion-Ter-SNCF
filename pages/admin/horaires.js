@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Sidebar from '../../components/Sidebar';
 import { AuthContext } from '../../src/contexts/AuthContext';
@@ -17,6 +17,7 @@ const WEEK_DAYS = [
 export default function Horaires() {
   const { role, isAuthenticated } = useContext(AuthContext);
   const router = useRouter();
+  const fileInputRef = useRef(null);
 
   const [schedules, setSchedules] = useState([]);
   const [folders, setFolders] = useState([]);
@@ -43,24 +44,25 @@ export default function Horaires() {
   const [joursCirculation, setJoursCirculation] = useState([]);
   const [folderId, setFolderId] = useState(null);
 
+  const [searchTerm, setSearchTerm] = useState('');
+
   useEffect(() => {
     if (!isAuthenticated || role !== 'admin') {
       router.push('/login');
     }
   }, [isAuthenticated, role, router]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const [schedulesRes, statusRes, foldersRes, stationsRes, materielsRes, trainTypesRes, mapRes] = await Promise.all([
-          fetch('/api/schedules'),
-          fetch('/api/gestion-horaires'),
-          fetch('/api/schedule-folders'),
-          fetch('/api/stations'),
-          fetch('/api/materiels-roulants'),
-          fetch('/api/train-types'),
-          fetch('/api/schedule-folder-map'),
-        ]);
+  const fetchData = async () => {
+    try {
+      const [schedulesRes, statusRes, foldersRes, stationsRes, materielsRes, trainTypesRes, mapRes] = await Promise.all([
+        fetch('/api/schedules'),
+        fetch('/api/gestion-horaires'),
+        fetch('/api/schedule-folders'),
+        fetch('/api/stations'),
+        fetch('/api/materiels-roulants'),
+        fetch('/api/train-types'),
+        fetch('/api/schedule-folder-map'),
+      ]);
 
         let schedulesData = [];
         let statusData = [];
@@ -152,9 +154,67 @@ export default function Horaires() {
       } catch (error) {
         console.error('Failed to fetch data:', error);
       }
-    }
+  }
+
+  useEffect(() => {
     fetchData();
   }, []);
+
+  const handleImportClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleDownloadSample = async () => {
+    try {
+      const response = await fetch('/api/schedules/download-sample');
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = "exemple-horaires.xlsx";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      } else {
+        alert("Erreur lors du téléchargement du fichier d'exemple.");
+      }
+    } catch (error) {
+      console.error('Error downloading sample file:', error);
+      alert("Une erreur est survenue lors du téléchargement.");
+    }
+  };
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await fetch('/api/schedules/import', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        alert(`Importation réussie: ${result.created} horaires créés, ${result.updated} mis à jour.`);
+        await fetchData();
+      } else {
+        const error = await response.json();
+        alert(`Erreur lors de l'importation: ${error.message}`);
+      }
+    } catch (error) {
+      console.error('Error importing schedules:', error);
+      alert("Une erreur est survenue lors de l'importation.");
+    }
+
+    // Reset file input
+    e.target.value = null;
+  };
 
   const saveFolders = async (newFolders) => {
     setFolders(newFolders);
@@ -323,14 +383,24 @@ export default function Horaires() {
 
   const schedulesToDisplay = selectedFolderId ? schedulesInFolder(selectedFolderId) : schedules;
 
-  const scheduleMap = schedulesToDisplay.reduce((acc, schedule) => {
+  // Filter schedulesToDisplay based on searchTerm
+  const filteredSchedules = schedulesToDisplay.filter(schedule => {
+    const term = searchTerm.toLowerCase();
+    return (
+      schedule.trainNumber.toLowerCase().includes(term) ||
+      schedule.departureStation.toLowerCase().includes(term) ||
+      schedule.arrivalStation.toLowerCase().includes(term)
+    );
+  });
+
+  const scheduleMap = filteredSchedules.reduce((acc, schedule) => {
     acc[schedule.id] = schedule;
     return acc;
   }, {});
 
   const displayedSchedules = scheduleOrder.length > 0
     ? scheduleOrder.map(id => scheduleMap[id]).filter(Boolean)
-    : schedulesToDisplay;
+    : filteredSchedules;
 
   return (
     <div id="wrapper" style={{ display: 'flex', minHeight: '100vh' }}>
@@ -344,9 +414,32 @@ export default function Horaires() {
             <button className="btn btn-primary me-3" onClick={handleCreateSchedule}>
               Créer un horaire
             </button>
+            <button className="btn btn-info me-2" onClick={handleImportClick}>
+              Importer des horaires
+            </button>
+            <button className="btn btn-outline-info me-3" onClick={handleDownloadSample}>
+              Télécharger un exemple
+            </button>
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+              accept=".xlsx, .xls"
+            />
             <button className="btn btn-secondary" onClick={handleCreateFolder}>
               Créer un dossier
             </button>
+          </div>
+
+          <div className="mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Rechercher un horaire..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
 
           <div className="d-flex">

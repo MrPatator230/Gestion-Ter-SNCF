@@ -7,8 +7,8 @@ const StationForm = ({
   setCategories,
   locationType,
   setLocationType,
-  allCategories = [], // default to empty array to avoid undefined
-  handleCategoryChange,
+  allCategories = [],
+  handleCategoryToggle,
   handleSubmit,
   editIndex,
   cancelEdit,
@@ -26,21 +26,34 @@ const StationForm = ({
           required
         />
       </div>
+      
       <div className="form-group mb-3">
-        <label htmlFor="categories">Catégories</label>
-        <select
-          id="categories"
-          className="form-control"
-          multiple
-          value={categories}
-          onChange={handleCategoryChange}
-          required
-        >
-          {allCategories.map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
+        <label>Catégories</label>
+        <div className="border rounded p-3">
+          {allCategories.map((category) => (
+            <div key={category} className="form-check form-check-inline me-3 mb-2">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id={`category-${category}`}
+                checked={categories.includes(category)}
+                onChange={() => handleCategoryToggle(category)}
+              />
+              <label 
+                className="form-check-label" 
+                htmlFor={`category-${category}`}
+                style={{ cursor: 'pointer' }}
+              >
+                {category}
+              </label>
+            </div>
           ))}
-        </select>
+        </div>
+        {categories.length === 0 && (
+          <small className="text-danger">Veuillez sélectionner au moins une catégorie</small>
+        )}
       </div>
+
       <div className="form-group mb-3">
         <label htmlFor="locationType">Type de lieu</label>
         <select
@@ -54,18 +67,21 @@ const StationForm = ({
           <option value="Interurbain">Interurbain</option>
         </select>
       </div>
-      <button type="submit" className="btn btn-primary">
-        {editIndex !== null ? 'Modifier la gare' : 'Ajouter la gare'}
-      </button>
-      {editIndex !== null && (
-        <button
-          type="button"
-          className="btn btn-secondary ms-2"
-          onClick={cancelEdit}
-        >
-          Annuler
+      
+      <div className="d-flex gap-2">
+        <button type="submit" className="btn btn-primary">
+          {editIndex !== null ? 'Modifier la gare' : 'Ajouter la gare'}
         </button>
-      )}
+        {editIndex !== null && (
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={cancelEdit}
+          >
+            Annuler
+          </button>
+        )}
+      </div>
     </form>
   );
 };

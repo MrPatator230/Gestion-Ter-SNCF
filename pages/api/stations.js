@@ -2,7 +2,20 @@ import pool from '../../utils/db';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    const { id, name } = req.query;
+    const { id, name, distinct } = req.query;
+
+    if (distinct === 'true') {
+      // Return distinct station names ordered alphabetically
+      try {
+        const query = 'SELECT DISTINCT name FROM stations ORDER BY name ASC';
+        const [rows] = await pool.query(query);
+        return res.status(200).json(rows);
+      } catch (error) {
+        console.error('Error fetching distinct station names:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+    }
+
     let connection;
     try {
       connection = await pool.getConnection();
@@ -123,7 +136,7 @@ export default async function handler(req, res) {
       if (connection) connection.release();
     }
   } else {
-    res.setHeader('Allow', ['GET', 'POST']);
+    res.setHeader('Allow', ['GET', 'POST', 'PATCH']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

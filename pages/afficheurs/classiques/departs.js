@@ -1,187 +1,150 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styles from './Afficheurs.module.css';
-import { getStationSchedules, filterSchedulesByType, sortSchedulesByTime, getTrainStatus, getStationTime, getNextDay, filterSchedulesByDay } from '../../../utils/scheduleUtils';
-import { useTrackAssignments } from '../../../src/contexts/TrackAssignmentContext';
-import Link from 'next/link';
-import { SettingsContext } from '../../../contexts/SettingsContext';
+import defilementStyles from './defilement.module.css';
 
-// Helper function to get current day string in English (e.g., 'Monday')
-const getCurrentDay = () => {
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const now = new Date();
-  return days[now.getDay()];
-};
+import { filterSchedulesByType, sortSchedulesByTime, getTrainStatus, getStationTime } from '../../../utils/scheduleUtils';
+import trainTypeLogos from '../../../data/trainTypeLogos.json';
 
 // Helper function to format time string "HH:mm" to 'HH"h"mm'
-const formatTimeHHhmmQuoted = (timeStr) => {
+const formatTimeHHhmm = (timeStr) => {
   if (!timeStr) return '';
   const [hours, minutes] = timeStr.split(':');
-  return `${hours}:${minutes}`;
+  return `${hours}h${minutes}`;
 };
 
+// Bottom information bar component
+const BottomInfoBar = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [showColon, setShowColon] = useState(true);
 
-export default function AfficheursPublic() {
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+      setShowColon((prev) => !prev);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatClockTime = (date) => {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return (
+      <>
+        {hours}
+        <span style={{ opacity: showColon ? 1 : 0 }}>:</span>
+        {minutes}
+      </>
+    );
+  };
+
+  const formatClockSeconds = (date) => {
+    return date.getSeconds().toString().padStart(2, '0');
+  };
+
+  return (
+    <div className={styles.bottomInfoBar}>
+      <div className={styles.clockContainer}>
+        <div className={styles.clockTime}>{formatClockTime(currentTime)}</div>
+        <div className={styles.clockSeconds}>{formatClockSeconds(currentTime)}</div>
+      </div>
+    </div>
+  );
+};
+
+export default function DeparturesAfficheur() {
   const router = useRouter();
-  const { gare, type } = router.query; // type can be 'departures' or 'arrivals'
+  let { gare, type } = router.query;
 
-  const { servedStationsLines } = useContext(SettingsContext);
-
-  const trackAssignmentsContext = useTrackAssignments();
-  const trackAssignments = trackAssignmentsContext ? trackAssignmentsContext.trackAssignments : {};
 
   const [schedules, setSchedules] = useState([]);
-  const [nextDaySchedules, setNextDaySchedules] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [trainTypeLogos, setTrainTypeLogos] = useState({});
-  const [displayPage, setDisplayPage] = useState(0);
-  const [stationInfo, setStationInfo] = useState(null);
+  const [showTrainType, setShowTrainType] = useState(true);
+  const [stationType, setStationType] = useState('Ville'); // default to 'ville'
 
-  const LINES_PER_PAGE = 10;
-  const DISPLAY_TIME_MS = 10000; // 10 seconds
+  // Determine lines per page based on type query parameter
+  const linesPerPage = type === 'normal' ? 9 : type === 'defilement' ? 20 : 10;
 
-  // Mapping to normalize trainType strings to keys in trainTypeLogos
-  const trainTypeMapping = {
-    'TER': 'TER',
-    'TGV InOui': 'TGV InOui',
-    'TGV Lyria': 'TGV Lyria',
-    'TGV Ouigo': 'TGV Ouigo',
-    'OUIGO Trains Classiques': 'OUIGO Trains Classiques',
-    'Intercités': 'Intercités',
-    'MOBIGO': 'MOBIGO',
-    'Car TER': 'Car TER',
-    // Add more mappings or aliases if needed
+  const scheduleListRef = useRef(null);
+
+  const getCurrentDay = () => {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const now = new Date();
+    return days[now.getDay()];
   };
 
   useEffect(() => {
-    let intervalId;
-
-    async function fetchTrainTypeLogos() {
-      try {
-        const res = await fetch('/api/trainTypeLogos');
-        if (res.ok) {
-          const data = await res.json();
-          setTrainTypeLogos(data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch train type logos:', error);
-      }
-    }
-
-    async function fetchStationInfo() {
-      if (gare) {
-        try {
-          const res = await fetch('/api/stations');
-          if (!res.ok) {
-            throw new Error(`Failed to fetch stations: ${res.status}`);
-          }
-          const stations = await res.json();
-          const currentStation = stations.find(st => st.name === gare);
-          setStationInfo(currentStation || null);
-        } catch (error) {
-          console.error('Failed to fetch station info:', error);
-          setStationInfo(null);
-        }
-      }
-    }
-
-    async function fetchSchedules() {
-      if (gare && (type === 'departures' || type === 'arrivals')) {
-        try {
-          const res = await fetch(`/api/schedules/by-station?station=${gare}`);
-          if (!res.ok) {
-            throw new Error(`API request failed: ${res.status}`);
-          }
-          
-          let allSchedules = await res.json();
-
-          // The API may return stringified JSON for some fields, so we parse them.
-          const schedulesWithParsedData = allSchedules.map(s => {
-            try {
-              return {
-                ...s,
-                joursCirculation: s.joursCirculation && typeof s.joursCirculation === 'string' ? JSON.parse(s.joursCirculation) : s.joursCirculation || [],
-              };
-            } catch (e) {
-              console.warn(`Failed to parse data for schedule ${s.id}`, e);
-              return { ...s, joursCirculation: [] }; // Fallback
-            }
-          });
-
-          const filteredByType = filterSchedulesByType(schedulesWithParsedData, gare, type);
-
-          // Filter schedules by current day of operation
-          const currentDay = getCurrentDay();
-          const filteredByDay = filterSchedulesByDay(filteredByType, currentDay);
-
-          const sorted = sortSchedulesByTime(filteredByDay, gare, type);
-          setSchedules(sorted);
-
-          // Get next day schedules
-          const nextDay = getNextDay(currentDay);
-          if (nextDay) {
-            const filteredNextDay = filterSchedulesByDay(filteredByType, nextDay);
-            const sortedNextDay = sortSchedulesByTime(filteredNextDay, gare, type);
-            setNextDaySchedules(sortedNextDay);
-          } else {
-            setNextDaySchedules([]);
-          }
-        } catch (error) {
-          console.error('Failed to fetch schedules:', error);
-          setSchedules([]);
-          setNextDaySchedules([]);
-        }
-        setLoading(false);
-      } else {
-        setSchedules([]);
-        setNextDaySchedules([]);
-        setLoading(false);
-      }
-    }
-
     async function fetchData() {
-      await fetchTrainTypeLogos();
-      await fetchStationInfo();
-      await fetchSchedules();
+      if (!gare) {
+        setSchedules([]);
+        setLoading(false);
+        return;
+      }
+      try {
+        // Fetch station info to get stationType
+        const stationRes = await fetch(`/api/stations?name=${gare}`);
+        if (stationRes.ok) {
+          const stationData = await stationRes.json();
+          setStationType((stationData.locationType || 'Ville').toLowerCase());
+        } else {
+          setStationType('Ville'); // fallback
+        }
+
+        // Fetch schedules
+        const res = await fetch(`/api/schedules/by-station?station=${gare}`);
+        if (!res.ok) throw new Error(`API request failed: ${res.status}`);
+        const allSchedules = await res.json();
+
+        const schedulesWithParsedData = allSchedules.map(s => ({
+          ...s,
+          joursCirculation: s.joursCirculation && typeof s.joursCirculation === 'string' ? JSON.parse(s.joursCirculation) : s.joursCirculation || [],
+        }));
+
+        // Temporarily disable filtering by type and day to debug Dijon schedules display
+         const filteredByType = filterSchedulesByType(schedulesWithParsedData, gare, 'departures');
+         const currentDay = getCurrentDay();
+         const filteredByDay = filteredByType.filter(schedule => {
+           if (!schedule.joursCirculation || schedule.joursCirculation.length === 0) return true;
+           return schedule.joursCirculation.includes(currentDay);
+         });
+         
+
+        // Use all schedules without filtering
+        const sorted = sortSchedulesByTime(schedulesWithParsedData, gare, 'departures');
+        setSchedules(sorted);
+      } catch (error) {
+        console.error('Failed to fetch schedules or station info:', error);
+        setSchedules([]);
+        setStationType('Ville');
+      }
+      setLoading(false);
     }
 
     fetchData();
+    const interval = setInterval(fetchData, 5000); // Refresh every 5 seconds
 
-    intervalId = setInterval(fetchData, 10000); // Poll every 10 seconds
-
-    return () => clearInterval(intervalId);
-  }, [gare, type]);
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, [gare]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDisplayPage(prev => {
-        if (schedules.length === 0) return 0;
-        return (prev + 1) % Math.ceil(schedules.length / LINES_PER_PAGE);
-      });
-    }, DISPLAY_TIME_MS);
+      setShowTrainType(prev => !prev);
+    }, 2000);
     return () => clearInterval(interval);
-  }, [schedules]);
+  }, []);
 
   if (!gare) {
     return (
-      <main className={styles.afficheursContainer} role="main">
-        <p className={styles.errorMessage}>Paramètre gare manquant. Veuillez fournir la gare dans l'URL.</p>
-      </main>
-    );
-  }
-
-  if (!type || (type !== 'departures' && type !== 'arrivals')) {
-    return (
-      <main className={styles.afficheursContainer} role="main">
-        <p className={styles.errorMessage}>Paramètre type manquant ou invalide. Utilisez 'departures' ou 'arrivals'.</p>
+      <main className={styles.afficheursContainer}>
+        <p className={styles.errorMessage}>Gare non spécifiée.</p>
       </main>
     );
   }
 
   if (loading) {
     return (
-      <main className={styles.afficheursContainer} role="main" aria-label={`Tableau des ${type}`}>
+      <main className={`${styles.afficheursContainer} ${styles.departuresBackground}`}>
         <p className={styles.loadingMessage}>Chargement...</p>
       </main>
     );
@@ -189,232 +152,173 @@ export default function AfficheursPublic() {
 
   if (schedules.length === 0) {
     return (
-      <main className={styles.afficheursContainer} role="main" aria-label={`Tableau des ${type}`}>
-        <p className={styles.noSchedulesMessage}>Aucun horaire trouvé pour cette gare.</p>
+      <main className={`${styles.afficheursContainer} ${styles.departuresBackground}`}>
+        <p className={styles.noSchedulesMessage}>Aucun départ prévu pour cette gare.</p>
+        <BottomInfoBar />
       </main>
     );
   }
 
-  // Pagination slice
-  const startIndex = displayPage * LINES_PER_PAGE;
-  const endIndex = startIndex + LINES_PER_PAGE;
-  const schedulesToDisplay = schedules.slice(startIndex, endIndex);
+  const now = new Date();
+  const currentTimeStr = now.toTimeString().slice(0, 5);
+
+  // Helper to convert "HH:mm" to minutes since midnight
+  const timeStrToMinutes = (timeStr) => {
+    const [h, m] = timeStr.split(':').map(Number);
+    return h * 60 + m;
+  };
+
+  // Determine threshold in minutes based on stationType
+  let thresholdMinutes;
+  if (stationType === 'ville') {
+    thresholdMinutes = 30; // 30 minutes for city stations
+  } else if (stationType === 'interurbain') {
+    thresholdMinutes = 12 * 60; // 12 hours for interurban stations
+  } else {
+    thresholdMinutes = 30; // Default to 30 minutes
+  }
+
+  const filteredSchedules = schedules.filter(schedule => {
+    const scheduleTime = getStationTime(schedule, gare, 'departure');
+    if (!scheduleTime) return false;
+    const scheduleMinutes = timeStrToMinutes(scheduleTime);
+    const nowMinutes = timeStrToMinutes(currentTimeStr);
+    // Filter to only show trains departing in the future
+    return scheduleMinutes >= nowMinutes;
+  });
+
+  const displayedSchedules = filteredSchedules.slice(0, linesPerPage);
 
   return (
-    <main
-      className={`${styles.afficheursContainer} ${type === 'departures' ? styles.departuresBackground : styles.arrivalsBackground}`}
-      role="main"
-      aria-label={`Tableau des ${type}`}
-    >
-      <ul className={styles.scheduleList} role="list">
-        {schedulesToDisplay.map((schedule, index) => {
-          const status = getTrainStatus(schedule);
-          const rawTrainType = schedule.trainType || 'MOBIGO';
-          const normalizedTrainType = trainTypeMapping[rawTrainType] || 'MOBIGO';
-          const logoSrc = trainTypeLogos[normalizedTrainType] || '/images/sncf-logo.png';
-          const isEven = index % 2 === 0;
-          const displayTime = getStationTime(schedule, gare, type === 'departures' ? 'departure' : 'arrival');
+    <main className={`${styles.afficheursContainer} ${styles.departuresBackground}`}>
+      <div className={styles.watermarkContainer}>
+        <img 
+          src="/components/afficheurs/row-background-departures.svg" 
+          alt="Watermark" 
+          className={styles.watermarkSVG}
+        />
+      </div>
+      <div className={`${styles.scheduleListContainer} ${type === 'normal' ? styles.noScroll : ''}`}>
+        <ul
+          ref={scheduleListRef}
+          className={`${styles.scheduleList} ${type === 'defilement' ? defilementStyles.scrollingList : ''}`}
+        >
+          {displayedSchedules.map((schedule, index) => {
+            const status = getTrainStatus(schedule);
+            const displayTime = getStationTime(schedule, gare, 'departure');
+            const isEven = index % 2 === 0;
 
-          // Extract the status code string from the status object
-          const statusCode = status.status;
+            const getPlatform = () => {
+              const scheduleTime = getStationTime(schedule, gare, 'departure');
+              if (scheduleTime) {
+                const scheduleMinutes = timeStrToMinutes(scheduleTime);
+                const nowMinutes = timeStrToMinutes(currentTimeStr);
 
-          // Calculate delayed time string
-          const getDelayedTime = () => {
-            if (!schedule.delayMinutes || schedule.delayMinutes <= 0) return null;
-            const [hours, minutes] = displayTime.split(':').map(Number);
-            let date = new Date();
-            date.setHours(hours);
-            date.setMinutes(minutes + schedule.delayMinutes);
-            const delayedHours = date.getHours().toString().padStart(2, '0');
-            const delayedMinutes = date.getMinutes().toString().padStart(2, '0');
-            return `${delayedHours}:${delayedMinutes}`;
-          };
+                if (scheduleMinutes >= nowMinutes && (scheduleMinutes - nowMinutes) <= thresholdMinutes) {
+                  try {
+                    if (schedule.trackAssignments) {
+                      const assignments = typeof schedule.trackAssignments === 'string' ? JSON.parse(schedule.trackAssignments) : schedule.trackAssignments;
+                      if (assignments && typeof assignments === 'object' && assignments[gare]) {
+                        return assignments[gare];
+                      }
+                    }
+                  } catch (e) {
+                    console.error('Error parsing trackAssignments:', e);
+                  }
+                  return schedule.track || null;
+                }
+              }
+              return null;
+            };
 
-          const delayedTime = getDelayedTime();
+            const platformToDisplay = getPlatform();
 
-          // Determine if the schedule should be hidden 2 minutes before departure or if arrival time has passed except for last train
-          const now = new Date();
-          const [hours, minutes] = displayTime.split(':').map(Number);
-          const scheduleDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
-          const diffMinutes = (scheduleDate - now) / 60000;
-
-          // Identify last schedule of the day
-          const lastSchedule = schedules[schedules.length - 1];
-          const lastDisplayTime = getStationTime(lastSchedule, gare, type === 'departures' ? 'departure' : 'arrival');
-          const [lastHours, lastMinutes] = lastDisplayTime.split(':').map(Number);
-          const lastScheduleDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), lastHours, lastMinutes);
-
-          if ((diffMinutes < 2 && diffMinutes >= 0) || (diffMinutes < 0 && scheduleDate.getTime() !== lastScheduleDate.getTime())) {
-            return null; // Hide the schedule row
-          }
-
-          // Served stations list logic
-          let stationsList = [];
-          if (schedule.servedStations && schedule.servedStations.length > 0) {
-            const normalizedStations = schedule.servedStations.map((station) =>
-              typeof station === 'object' ? station.name : station
-            );
-            const selectedStationIndex = normalizedStations.indexOf(gare);
-            if (type === 'departures') {
+            let stationsList = [];
+            if (schedule.servedStations && schedule.servedStations.length > 0) {
+              const normalizedStations = schedule.servedStations.map(station =>
+                typeof station === 'object' ? station.name : station
+              );
+              const selectedStationIndex = normalizedStations.indexOf(gare);
               if (selectedStationIndex !== -1) {
                 stationsList = normalizedStations.slice(selectedStationIndex + 1);
               } else {
                 stationsList = normalizedStations;
               }
-            } else if (type === 'arrivals') {
-              if (selectedStationIndex !== -1) {
-                stationsList = normalizedStations.slice(0, selectedStationIndex);
-              } else {
-                stationsList = normalizedStations;
-              }
             }
-          }
 
-          // Platform display logic
-          const locationType = stationInfo?.locationType || 'Ville';
-          const showPlatformTime = locationType === 'Ville' ? 20 : 720; // 20 minutes for Ville, 720 minutes (12h) for Interurbain
-          const showPlatform = diffMinutes <= showPlatformTime && diffMinutes >= 0;
-          const platform = showPlatform ? (trackAssignments[schedule.id]?.[gare] || schedule.track || '-') : '';
-
-          return (
-            <li
-              key={schedule.id}
-              className={`${styles.scheduleRow} ${isEven ? styles.scheduleRowEven : styles.scheduleRowOdd}`}
-              role="listitem"
-            >
-              <section className={styles.leftSection}>
-                <div className={styles.sncfLogoContainer}>
-                  <Image src={logoSrc} alt={normalizedTrainType} layout="fill" objectFit="contain" />
-                </div>
-                <div className={styles.alternatingTextContainer}>
-                  <div className={styles.trainTypeNameContainer}>
-                    <div className={styles.trainTypeText}>{normalizedTrainType}</div>
-                    <div className={styles.trainNumberText}>{schedule.trainNumber || ''}</div>
-                  </div>
-                  {statusCode === 'ontime' && <div className={styles.statusText}>à l&apos;heure</div>}
-                  {statusCode === 'delayed' && <div className={styles.statusText}>Retardé</div>}
-                  {statusCode === 'cancelled' && <div className={styles.statusText}>Supprimé</div>}
-                </div>
-                <time className={styles.departureTime} dateTime={displayTime} style={{ color: '#ffea00' }}>
-                  {formatTimeHHhmmQuoted(displayTime)}
-                </time>
-              </section>
-              <section className={styles.middleSection}>
-                <div className={styles.destination}>
-                  {type === 'departures' ? schedule.arrivalStation : schedule.departureStation}
-                </div>
-                {stationsList.length > 0 && (
-                  <div className={styles.servedStations}>
-                    <div className={styles.marquee} aria-label="Liste des gares desservies" role="list">
-                      <div className={styles.marqueeContent}>
-                        {stationsList.map((station, idx) => (
-                          <span key={idx} className={styles.stationName} role="listitem">
-                            {idx > 0 && <span className={styles.dotSeparator} aria-hidden="true">•</span>}
-                            {station}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </section>
-              <div
-                className={styles.rightSection}
-                aria-hidden={!showPlatform}
+            return (
+              <li
+                key={`${schedule.id}-${index}`}
+                className={`${styles.scheduleRow} ${isEven ? styles.scheduleRowEven : styles.scheduleRowOdd} ${
+                  index < 2 ? styles.firstTwoRows : ''
+                }`}
               >
-                {platform}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-      {displayPage === 0 && nextDaySchedules.length > 0 && (
-        <section className={styles.nextDaySection}>
-          <p className={styles.nextDayText}>Les prochains {type} auront lieu demain.</p>
-          <ul className={styles.scheduleList} role="list">
-            {nextDaySchedules.slice(0, LINES_PER_PAGE).map((schedule, index) => {
-              const status = getTrainStatus(schedule);
-              const rawTrainType = schedule.trainType || 'MOBIGO';
-              const normalizedTrainType = trainTypeMapping[rawTrainType] || 'MOBIGO';
-              const logoSrc = trainTypeLogos[normalizedTrainType] || '/images/sncf-logo.png';
-              const isEven = index % 2 === 0;
-              const displayTime = getStationTime(schedule, gare, type === 'departures' ? 'departure' : 'arrival');
-              const statusCode = status.status;
-
-              return (
-                <li
-                  key={schedule.id}
-                  className={`${styles.scheduleRow} ${isEven ? styles.scheduleRowEven : styles.scheduleRowOdd}`}
-                  role="listitem"
-                >
-                  <section className={styles.leftSection}>
-                    <div className={styles.sncfLogoContainer}>
-                      <Image src={logoSrc} alt={normalizedTrainType} layout="fill" objectFit="contain" />
-                    </div>
-                    <div className={styles.alternatingTextContainer}>
-                      <div className={styles.trainTypeNameContainer}>
-                        <div className={styles.trainTypeText}>{normalizedTrainType}</div>
-                        <div className={styles.trainNumberText}>{schedule.trainNumber || ''}</div>
-                      </div>
-                      {statusCode === 'ontime' && <div className={styles.statusText}>à l&apos;heure</div>}
-                      {statusCode === 'delayed' && <div className={styles.statusText}>Retardé</div>}
-                      {statusCode === 'cancelled' && <div className={styles.statusText}>Supprimé</div>}
-                    </div>
-                    <time className={styles.departureTime} dateTime={displayTime} style={{ color: '#ffea00' }}>
-                      {formatTimeHHhmmQuoted(displayTime)}
-                    </time>
-                  </section>
-                  <section className={styles.middleSection}>
-                    <div className={styles.destination}>
-                      {type === 'departures' ? schedule.arrivalStation : schedule.departureStation}
-                    </div>
-                    {schedule.servedStations && schedule.servedStations.length > 0 && (
-                      <div className={styles.servedStations}>
-                        <div className={styles.marquee} aria-label="Liste des gares desservies" role="list">
-                          <div className={styles.marqueeContent}>
-                            {(() => {
-                              const normalizedStations = schedule.servedStations.map((station) =>
-                                typeof station === 'object' ? station.name : station
-                              );
-                              const selectedStationIndex = normalizedStations.indexOf(gare);
-                              let stationsList = [];
-                              if (type === 'departures') {
-                                if (selectedStationIndex !== -1) {
-                                  stationsList = normalizedStations.slice(selectedStationIndex + 1);
-                                } else {
-                                  stationsList = normalizedStations;
-                                }
-                              } else if (type === 'arrivals') {
-                                if (selectedStationIndex !== -1) {
-                                  stationsList = normalizedStations.slice(0, selectedStationIndex);
-                                } else {
-                                  stationsList = normalizedStations;
-                                }
-                              }
-                              return stationsList.map((station, idx) => (
-                                <span key={idx} className={styles.stationName} role="listitem">
-                                  {idx > 0 && <span className={styles.dotSeparator} aria-hidden="true">•</span>}
-                                  {station}
-                                </span>
-                              ));
-                            })()}
-                          </div>
+                <section className={styles.leftSection}>
+                  <div className={styles.sncfLogoContainer}>
+                    <Image
+                      src={trainTypeLogos[schedule.trainType] || '/sncf-logo.png'}
+                      alt={schedule.trainType || 'SNCF'}
+                      fill
+                      sizes="100px"
+                    />
+                  </div>
+                  <div className={styles.statusText}>
+                    {showTrainType ? (
+                      <>
+                        <div className={styles.statusText}>{schedule.trainType || ''}</div>
+                        <div className={styles.trainNumber}>
+                          {schedule.trainNumber || schedule.train || schedule.trainId || ''}
                         </div>
+                      </>
+                    ) : (
+                      <div>
+                        {status.status === 'ontime'
+                          ? "à l'heure"
+                          : status.status === 'delayed'
+                          ? `Retard ${schedule.delayMinutes}min`
+                          : 'Supprimé'}
                       </div>
                     )}
-                  </section>
-                  <div
-                    className={styles.rightSection}
-                    aria-hidden={true}
-                  >
-                    {trackAssignments[schedule.id]?.[gare] || schedule.track || '-'}
                   </div>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      )}
+                  <time className={styles.departureTime} dateTime={displayTime}>
+                    {formatTimeHHhmm(displayTime)}
+                  </time>
+                </section>
+
+                <section className={styles.middleSection}>
+                  <div className={`${styles.destination} ${schedule.arrivalStation.length > 15 ? styles.scrollDestination : ''}`}>
+                    <div className={schedule.arrivalStation.length > 15 ? styles.destinationScroll : ''}>
+                      {schedule.arrivalStation}
+                    </div>
+                  </div>
+                  {index < 2 && stationsList.length > 0 && (
+                    <div className={styles.servedStations}>
+                      <div className={styles.marquee}>
+                        <div className={styles.marqueeContent}>
+                          {stationsList.map((station, idx) => (
+                            <span key={idx}>
+                              {station}
+                              {idx < stationsList.length - 1 && <span className={styles.dotSeparator}> • </span>}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </section>
+                <section className={styles.rightSection}>
+                  {platformToDisplay && (
+                    <div className={styles.platform}>
+                      {platformToDisplay}
+                    </div>
+                  )}
+                </section>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <BottomInfoBar />
     </main>
   );
 }

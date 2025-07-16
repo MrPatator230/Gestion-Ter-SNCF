@@ -1,0 +1,178 @@
+@font-face {
+	font-family: "Achemine";
+	src: url("../../../../src/fonts/Achemine/achemine_normal.eot") format("embedded-opentype"),
+	url("../../../../src/fonts/Achemine/achemine_normal.woff") format("woff"),
+	url("../../../../src/fonts/Achemine/achemine_normal.ttf") format("truetype"),
+	url("../../../../src/fonts/Achemine/achemine_normal.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+.afficheurContainer {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Achemine', sans-serif;
+  background-color: #000055; /* Dark blue background */
+  color: white;
+  overflow: hidden;
+  position: relative;
+}
+
+.leftPanel {
+  background-color: rgba(255, 255, 255, 0.826);
+  color: #000055;
+  width: 40%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: flex-start;
+}
+
+.sncfLogo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.timeInfo {
+  font-size: 6rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.status {
+  font-size: 1.8rem;
+  margin-left: 1rem;
+  align-self: flex-end;
+  position: relative;
+  top: -1.2rem;
+}
+
+.destination {
+  font-size: 5rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.trainInfo {
+  font-size: 1.8rem;
+  color: #888;
+  margin-top: 0.3rem;
+}
+
+
+
+.rightPanel {
+  width: 60%;
+  padding: 1rem 2rem 5rem 6rem;
+  position: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.stationContainer {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.stationList {
+  list-style: none;
+  padding-left: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  transition: transform 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.stationList::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  background-color: #4a4a9a;
+  border-radius: 5px;
+}
+
+.stationItem {
+  font-size: 2.7rem;
+  margin-bottom: 0;
+  position: relative;
+  padding-left: 3rem;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.stationItem::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-color: #ffd700; /* Yellow dot */
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+}
+
+.highlightedStation {
+  background-color: #4a4a9a;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.stationListContainer {
+  height: calc(100vh - 200px); /* Adjust height to fit the footer */
+  overflow-y: auto;
+  position: relative;
+}
+
+.clockContainer {
+    display: flex;
+    align-items: baseline;
+    background-color: #003366;
+    padding: 10px 20px;
+    font-family: 'Achemine';
+    font-weight: 900;
+    font-size: 1rem;
+    width: 200px;
+    border-radius: 10px;
+    border: 5px solid white;
+}
+.footerClock {
+   width: 200px;
+  height: auto;
+ 
+   padding: 0.5rem 1.5rem;
+   padding-bottom: 90%;
+   padding-top: 59%;
+   border-radius: 8px;
+   font-size: 2rem;
+   font-weight: bold;
+  z-index: 10;
+ }
+
+.clockTime {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+}
+.clockSeconds {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #f5a623;
+  margin-left: 15px;
+}
+.seconds {
+    color: orange;
+}

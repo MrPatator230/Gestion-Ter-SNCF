@@ -1,11 +1,13 @@
 import pool from '../../../utils/db';
 
 export default async function handler(req, res) {
-  const { station } = req.query;
+const { station, gare } = req.query;
 
-  if (!station) {
-    return res.status(400).json({ error: 'Station parameter is required' });
-  }
+const stationParam = station || gare;
+
+if (!stationParam) {
+  return res.status(400).json({ error: 'Station or Gare parameter is required' });
+}
 
   let connection;
   try {
@@ -14,14 +16,14 @@ export default async function handler(req, res) {
     // We use LIKE for a simple search. This might match parts of station names,
     // so it's not perfect but works for many cases without complex JSON queries.
     // A better approach would be to normalize the data structure in the DB.
-    const query = `
-      SELECT * FROM schedules 
-      WHERE LOWER(departure_station) = LOWER(?) 
-      OR LOWER(arrival_station) = LOWER(?) 
-      OR LOWER(served_stations) LIKE LOWER(?)
-    `;
-    const likePattern = `%"${station}"%`;
-    const [rows] = await connection.query(query, [station, station, likePattern]);
+const query = `
+  SELECT * FROM schedules 
+  WHERE LOWER(departure_station) = LOWER(?) 
+  OR LOWER(arrival_station) = LOWER(?) 
+  OR LOWER(served_stations) LIKE LOWER(?)
+`;
+const likePattern = `%"${stationParam}"%`;
+const [rows] = await connection.query(query, [stationParam, stationParam, likePattern]);
 
     // Transform keys from snake_case to camelCase
     const camelCaseRows = rows.map(row => ({

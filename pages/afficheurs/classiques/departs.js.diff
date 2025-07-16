@@ -1,0 +1,36 @@
+const LINES_PER_PAGE = 10;
+  const DISPLAY_TIME_MS = 10000; // 10 seconds
+
+  // Mapping to normalize trainType strings to keys in trainTypeLogos
+  const trainTypeMapping = {
+    'TER': 'TER',
+    'TGV InOui': 'TGV InOui',
+    'TGV Lyria': 'TGV Lyria',
+    'TGV Ouigo': 'TGV Ouigo',
+    'OUIGO Trains Classiques': 'OUIGO Trains Classiques',
+    'Intercités': 'Intercités',
+    'MOBIGO': 'MOBIGO',
+    'Car TER': 'Car TER',
+    // Add more mappings or aliases if needed
+  };
+=======
+  const [stationInfo, setStationInfo] = useState(null);
+
+  // New state to toggle display between train type and status
+  const [showTrainType, setShowTrainType] = useState(true);
+
+  const LINES_PER_PAGE = 10;
+  const DISPLAY_TIME_MS = 10000; // 10 seconds
+
+  // Mapping to normalize trainType strings to keys in trainTypeLogos
+  const trainTypeMapping = {
+    'TER': 'TER',
+    'TGV InOui': 'TGV InOui',
+    'TGV Lyria': 'TGV Lyria',
+    'TGV Ouigo': 'TGV Ouigo',
+    'OUIGO Trains Classiques': 'OUIGO Trains Classiques',
+    'Intercités': 'Intercités',
+    'MOBIGO': 'MOBIGO',
+    'Car TER': 'Car TER',
+    // Add more mappings or aliases if needed
+  };

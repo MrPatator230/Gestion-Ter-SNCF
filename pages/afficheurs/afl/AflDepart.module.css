@@ -1,9 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Achemine&display=swap');
-
+@font-face {
+	font-family: "Achemine";
+	src: url("../../../src/fonts/Achemine/achemine_normal.eot") format("embedded-opentype"),
+	url("../../../src/fonts/Achemine/achemine_normal.woff") format("woff"),
+	url("../../../src/fonts/Achemine/achemine_normal.ttf") format("truetype"),
+	url("../../../src/fonts/Achemine/achemine_normal.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
 .aflContainer {
   background-color: #003366; /* Updated to match the dark blue background in the image */
   padding: 0;
-  font-family: 'Avenir', 'sans-serif';
+  font-family: 'Achemine', 'sans-serif';
   width: 100vw;
   height: 92vh;
   max-width: 100%;
